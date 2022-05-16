@@ -32,21 +32,25 @@ const RootQuery = new GraphQLObjectType({
 			description: 'List of all books',
 			resolve: () => books,
 		},
+		message: {
+			type: GraphQLString,
+			resolve: () => 'First GraphQLSchemaObj',
+		},
 	}),
 });
-// declaring new graphQLschema
-const schemaSimple = new GraphQLSchema({
-	//declaring new graphQLobj
-	query: new GraphQLObjectType({
-		name: 'FirstGraphQLObjs',
-		fields: () => ({
-			message: {
-				type: GraphQLString,
-				resolve: () => 'First GraphQLSchemaObj',
-			},
-		}),
-	}),
-});
+// // declaring new graphQLschema
+// const schemaSimple = new GraphQLSchema({
+// 	//declaring new graphQLobj
+// 	query: new GraphQLObjectType({
+// 		name: 'FirstGraphQLObjs',
+// 		fields: () => ({
+// 			message: {
+// 				type: GraphQLString,
+// 				resolve: () => 'First GraphQLSchemaObj',
+// 			},
+// 		}),
+// 	}),
+// });
 
 const schemaComplex = new GraphQLSchema({
 	query: RootQuery,
