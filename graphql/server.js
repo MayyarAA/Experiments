@@ -13,6 +13,8 @@ const {
 	GraphQLID,
 } = require('graphql');
 
+//queries
+
 const AuthorTyopeQL = new GraphQLObjectType({
 	name: 'AuthorObj',
 	description: 'Author of book',
@@ -65,8 +67,31 @@ const RootQuery = new GraphQLObjectType({
 	}),
 });
 
+//mutations
+
+const RootMutationType = new GraphQLObjectType({
+	name: 'RootMutation',
+	description: 'root mutation obj',
+	fields: () => ({
+		addBook: {
+			type: BookTypeQL,
+			description: 'fcn to add book',
+			args: {
+				name: { type: GraphQLNonNull(GraphQLString) },
+				authorId: { type: GraphQLNonNull(GraphQLInt) },
+			},
+			resolve: (parent, args) => {
+				const newBook = { id: books.length + 1, name: args.name, authorId: args.authorId };
+				books.push(newBook); //bec we not using db rn, simple example
+				return newBook; //just to return successful book created
+			},
+		},
+	}),
+});
+
 const schemaComplex = new GraphQLSchema({
 	query: RootQuery,
+	mutation: RootMutationType,
 });
 
 app.use(
