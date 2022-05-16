@@ -31,7 +31,7 @@ const BookTypeQL = new GraphQLObjectType({
 		author: {
 			type: AuthorTyopeQL,
 			resolve: (book) => {
-				return authors.find(author.id == book.authorId);
+				return authors.find((author) => author.id == book.authorId);
 			},
 		},
 	}),
@@ -45,10 +45,22 @@ const RootQuery = new GraphQLObjectType({
 			type: GraphQLString,
 			resolve: () => 'First GraphQLSchemaObj',
 		},
+		book: {
+			type: BookTypeQL,
+			description: 'One singel book by bookId',
+			args: { bookId: { type: GraphQLInt } },
+			resolve: (parent, args) => {
+				return books.find((book) => book.id == args.bookId);
+			},
+		},
 		books: {
 			type: new GraphQLList(BookTypeQL),
 			description: 'List of all books',
 			resolve: () => books,
+		},
+		authors: {
+			type: new GraphQLList(AuthorTyopeQL),
+			resolve: () => authors,
 		},
 	}),
 });
