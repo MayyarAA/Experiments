@@ -1,5 +1,6 @@
 import express from 'express';
-
+import { SecondFileMainRunner } from './secondFile.js';
+import { ThirdFileMainRunner } from './thirdFile.js';
 const app = express();
 const PORT = 5001;
 
@@ -25,7 +26,6 @@ const thriFcn = (str, time, timeFcn) => {
 			timeFcn(str, time);
 		}, time * 2);
 	});
-	// console.log('this log is inside the thriFcn but is compiled right under setTimeout');
 };
 
 const firFcn = async () => {
@@ -36,4 +36,6 @@ const firFcn = async () => {
 	console.log('*logging from fir Fcn after thriFcn call');
 };
 
-mainFcnRunner();
+// mainFcnRunner();
+//SecondFileMainRunner();
+ThirdFileMainRunner();
