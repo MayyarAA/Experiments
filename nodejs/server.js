@@ -18,17 +18,20 @@ const secFcn = () => {
 
 const thriFcn = (str, time, timeFcn) => {
 	console.log('logging from thriFcn before setTimeout ***');
-	setTimeout(() => {
-		//call back fcn
-		timeFcn(str, time);
-	}, time);
-	console.log('this log is inside the thriFcn but is compiled right under setTimeout');
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			console.log('logging from inside setTimeout');
+			resolve();
+			timeFcn(str, time);
+		}, time * 2);
+	});
+	// console.log('this log is inside the thriFcn but is compiled right under setTimeout');
 };
 
 const firFcn = async () => {
 	console.log('*logging from fir Fcn before thriFcn call');
-	thriFcn('logging from thir fnc', 2, (str, time) => {
-		console.log(`${str} + ${time}`);
+	await thriFcn('logging from thir fnc', 2, (str, time) => {
+		console.log(`${str} + ${time} in the timeFcn`);
 	});
 	console.log('*logging from fir Fcn after thriFcn call');
 };
