@@ -95,6 +95,18 @@ const RootQuery = new GraphQLObjectType({
 
 //mutations
 
+const addImageToDB = async (image) => {
+	const data = image.data;
+	const Id = image.Id;
+	console.log(JSON.stringify(image));
+	const newImage = CaptchaImage({ data, Id });
+	try {
+		await newImage.save();
+	} catch (e) {
+		throw new Error('error unable to save image => ' + e);
+	}
+};
+
 const RootMutationType = new GraphQLObjectType({
 	name: 'RootMutation',
 	description: 'root mutation obj',
@@ -107,7 +119,8 @@ const RootMutationType = new GraphQLObjectType({
 				// Id: { type: GraphQLNonNull(GraphQLInt) },
 			},
 			resolve: (parent, args) => {
-				const newImage = { id: uuid.v4(), data: args.data };
+				const newImage = { Id: uuid.v4(), data: args.data };
+				addImageToDB(newImage);
 				return newImage;
 			},
 		},

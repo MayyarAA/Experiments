@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const captchaImageSchema = new Schema(
 	{
 		data: { type: String, required: true },
-		Id: { type: Number, required: true },
+		Id: { type: String, required: true },
 	},
 	{ collection: 'CaptchaImage' }
 );
