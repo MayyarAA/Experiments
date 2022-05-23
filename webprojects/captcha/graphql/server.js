@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+const connectDB = require('./config/database.js');
 const { authors, books } = require('./fakeData.js');
-
+const CaptchaImage = require('./Model/CaptchaImage.js');
 const { graphqlHTTP } = require('express-graphql');
+const uuid = require('uuid');
 const {
 	GraphQLSchema,
 	GraphQLObjectType,
@@ -14,7 +16,7 @@ const {
 } = require('graphql');
 
 //queries
-
+connectDB();
 const AuthorTyopeQL = new GraphQLObjectType({
 	name: 'AuthorObj',
 	description: 'Author of book',
@@ -66,6 +68,8 @@ const RootQuery = new GraphQLObjectType({
 			resolve: (parent, args) => {
 				res = captchaImages.find((image) => image.Id == args.Id);
 				console.log(JSON.stringify(res) + '    ' + res);
+				// addToDB(res);
+				// CaptchaImage.save()
 				return res;
 			},
 		},
@@ -95,6 +99,18 @@ const RootMutationType = new GraphQLObjectType({
 	name: 'RootMutation',
 	description: 'root mutation obj',
 	fields: () => ({
+		addCaptchaImage: {
+			type: CaptchaImageTypeQL,
+			description: 'fcn to add captchaimage',
+			args: {
+				data: { type: GraphQLNonNull(GraphQLString) },
+				// Id: { type: GraphQLNonNull(GraphQLInt) },
+			},
+			resolve: (parent, args) => {
+				const newImage = { id: uuid.v4(), data: args.data };
+				return newImage;
+			},
+		},
 		addBook: {
 			type: BookTypeQL,
 			description: 'fcn to add book',
