@@ -4,7 +4,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { DataContext } from '../Context/Context.js';
 export default function MainGrid() {
 	let temp = {};
-	//<key,value>
+	//<key,value> s
 	temp[1] = { key: 1, value: 2 };
 	console.log(temp[1]);
 	return (
