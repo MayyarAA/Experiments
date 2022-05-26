@@ -23,6 +23,15 @@ const AuthorTyopeQL = new GraphQLObjectType({
 		name: { type: GraphQLNonNull(GraphQLString) },
 	}),
 });
+
+const CaptchaImageTypeQL = new GraphQLObjectType({
+	name: 'CaptchaImage',
+	description: 'Image used for captcha',
+	fields: () => ({
+		id: { type: GraphQLNonNull(GraphQLID) },
+		data: { type: GraphQLNonNull(GraphQLString) },
+	}),
+});
 const BookTypeQL = new GraphQLObjectType({
 	name: 'Book',
 	description: 'Book object',
@@ -38,6 +47,10 @@ const BookTypeQL = new GraphQLObjectType({
 		},
 	}),
 });
+const captchaImages = [
+	{ id: 1, data: 'datastring' },
+	{ id: 2, data: 'datastring2' },
+];
 
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQuery',
@@ -46,6 +59,13 @@ const RootQuery = new GraphQLObjectType({
 		message: {
 			type: GraphQLString,
 			resolve: () => 'First GraphQLSchemaObj',
+		},
+		captchaImage: {
+			type: CaptchaImageTypeQL,
+			args: { id: { type: GraphQLInt } },
+			resolve: (parent, args) => {
+				return captchaImages.find((image) => image.id == args.Id);
+			},
 		},
 		book: {
 			type: BookTypeQL,
