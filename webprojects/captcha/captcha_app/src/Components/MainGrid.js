@@ -3,6 +3,11 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { DataContext } from '../Context/Context.js';
 export default function MainGrid() {
+	for (let i = 0; i < itemData.length; i++) {
+		let temp = itemData[i];
+		temp.Id = i + 1;
+		itemData[i] = temp;
+	}
 	let temp = {};
 	//<key,value> s
 	temp[1] = { key: 1, value: 2 };
@@ -14,31 +19,41 @@ export default function MainGrid() {
 	);
 }
 const imageObj = {
-	id: 1111,
+	Id: 11111,
 	title: 'big image',
 };
+
+function ImageObjectAPIVersion(Id, imageTitle) {
+	this.Id = Id;
+	this.imageTitle = imageTitle;
+}
 function StandardImageList(props) {
-	// const [selectedImages, setSelectedImages] = useState({});
 	const { selectedImages, setSelectedImages } = useContext(DataContext);
 	const imageListClickHandler = (image) => {
 		console.log(selectedImages);
-		if (image.id in selectedImages) {
+		if (image.Id in selectedImages) {
 			//image already in unselect it
-			console.log('here now ' + image.id);
-		} else {
 			let selectedImagesLocal = selectedImages;
-			selectedImagesLocal[image.id] = image;
+			delete selectedImagesLocal[image.Id];
 			setSelectedImages(selectedImagesLocal);
+			console.log('here now ' + image.Id);
+		} else {
 			//add image to selected
+			let selectedImagesLocal = selectedImages;
+			selectedImagesLocal[image.Id] = new ImageObjectAPIVersion(image.Id, image.title);
+			setSelectedImages(selectedImagesLocal);
 		}
 	};
+
 	return (
 		<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-			{props.itemData.map((item) => (
+			{props.itemData.map((item, i) => (
 				<ImageListItem
 					key={item.img}
 					onClick={() => {
-						imageListClickHandler(imageObj);
+						// console.log(props.itemData[i]);
+						// console.log(item);
+						imageListClickHandler(item);
 					}}>
 					<img
 						src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
