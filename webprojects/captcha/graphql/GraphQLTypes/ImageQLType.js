@@ -12,8 +12,9 @@ const CaptchaImageTypeQL = new GraphQLObjectType({
 	name: 'CaptchaImage',
 	description: 'Image used for captcha',
 	fields: () => ({
-		Id: { type: GraphQLNonNull(GraphQLID) },
-		data: { type: GraphQLNonNull(GraphQLString) },
+		Id: { type: GraphQLNonNull(GraphQLInt) },
+		ImageValue: { type: GraphQLString },
+		ImageData: { type: GraphQLNonNull(GraphQLString) },
 	}),
 });
 
