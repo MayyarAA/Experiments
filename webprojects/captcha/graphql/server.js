@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const connectDB = require('./config/database.js');
@@ -66,6 +67,7 @@ const RootQuery = new GraphQLObjectType({
 			type: CaptchaImageTypeQL,
 			args: { Id: { type: GraphQLInt } },
 			resolve: (parent, args) => {
+				console.log('req made here => captchaImage');
 				res = captchaImages.find((image) => image.Id == args.Id);
 				console.log(JSON.stringify(res) + '    ' + res);
 				// addToDB(res);
@@ -145,6 +147,14 @@ const schemaComplex = new GraphQLSchema({
 	mutation: RootMutationType,
 });
 
+app.use(
+	cors({
+		origin: 'http://localhost:3000', // allow to server to accept request from different origin
+		// origin: `${process.env.CLIENTSIDE_PORT}`, // allow to server to accept request from different origin
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+		credentials: true, // allow session cookie from browser to pass through
+	})
+);
 app.use(
 	'/graphql',
 	graphqlHTTP({
