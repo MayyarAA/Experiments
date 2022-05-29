@@ -5,6 +5,7 @@ import { DataContextProvider } from './Context/Context.js';
 import { ApolloClientCaptcha } from './ApolloClient/ApolloClientCaptcha.js';
 import { ApolloProvider } from '@apollo/client';
 function App() {
+	console.log('App ');
 	return (
 		<DataContextProvider>
 			<ApolloProvider client={ApolloClientCaptcha}>
