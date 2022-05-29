@@ -2,7 +2,9 @@ import { useState, useContext } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { DataContext } from '../Context/Context.js';
+import { GetAllImagesService } from '../Services/GetAllImagesService.js';
 export default function MainGrid() {
+	GetAllImagesService();
 	for (let i = 0; i < itemData.length; i++) {
 		let temp = itemData[i];
 		temp.Id = i + 1;
