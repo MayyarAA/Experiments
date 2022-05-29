@@ -4,6 +4,9 @@ const app = express();
 const connectDB = require('./config/database.js');
 const { authors, books } = require('./fakeData.js');
 const CaptchaImage = require('./Model/CaptchaImage.js');
+const RootQuery = require('./Queries/ImageQueries.js');
+const RootMutationType = require('./Mutations/ImageMutations.js');
+// console.log(JSON.stringify(RootQuery));
 const { graphqlHTTP } = require('express-graphql');
 const uuid = require('uuid');
 const {
@@ -18,82 +21,6 @@ const {
 
 //queries
 connectDB();
-const AuthorTyopeQL = new GraphQLObjectType({
-	name: 'AuthorObj',
-	description: 'Author of book',
-	fields: () => ({
-		id: { type: GraphQLNonNull(GraphQLID) },
-		name: { type: GraphQLNonNull(GraphQLString) },
-	}),
-});
-
-const CaptchaImageTypeQL = new GraphQLObjectType({
-	name: 'CaptchaImage',
-	description: 'Image used for captcha',
-	fields: () => ({
-		Id: { type: GraphQLNonNull(GraphQLID) },
-		data: { type: GraphQLNonNull(GraphQLString) },
-	}),
-});
-const BookTypeQL = new GraphQLObjectType({
-	name: 'Book',
-	description: 'Book object',
-	fields: () => ({
-		id: { type: GraphQLNonNull(GraphQLID) },
-		name: { type: GraphQLNonNull(GraphQLString) },
-		authorId: { type: GraphQLNonNull(GraphQLInt) },
-		author: {
-			type: AuthorTyopeQL,
-			resolve: (book) => {
-				return authors.find((author) => author.id == book.authorId);
-			},
-		},
-	}),
-});
-const captchaImages = [
-	{ Id: 1, data: 'datastring' },
-	{ Id: 2, data: 'datastring2' },
-];
-
-const RootQuery = new GraphQLObjectType({
-	name: 'RootQuery',
-	description: 'Root Query',
-	fields: () => ({
-		message: {
-			type: GraphQLString,
-			resolve: () => 'First GraphQLSchemaObj',
-		},
-		captchaImage: {
-			type: CaptchaImageTypeQL,
-			args: { Id: { type: GraphQLInt } },
-			resolve: (parent, args) => {
-				console.log('req made here => captchaImage');
-				res = captchaImages.find((image) => image.Id == args.Id);
-				console.log(JSON.stringify(res) + '    ' + res);
-				// addToDB(res);
-				// CaptchaImage.save()
-				return res;
-			},
-		},
-		book: {
-			type: BookTypeQL,
-			description: 'One singel book by bookId',
-			args: { bookId: { type: GraphQLInt } },
-			resolve: (parent, args) => {
-				return books.find((book) => book.id == args.bookId);
-			},
-		},
-		books: {
-			type: new GraphQLList(BookTypeQL),
-			description: 'List of all books',
-			resolve: () => books,
-		},
-		authors: {
-			type: new GraphQLList(AuthorTyopeQL),
-			resolve: () => authors,
-		},
-	}),
-});
 
 //mutations
 
@@ -109,42 +36,10 @@ const addImageToDB = async (image) => {
 	}
 };
 
-const RootMutationType = new GraphQLObjectType({
-	name: 'RootMutation',
-	description: 'root mutation obj',
-	fields: () => ({
-		addCaptchaImage: {
-			type: CaptchaImageTypeQL,
-			description: 'fcn to add captchaimage',
-			args: {
-				data: { type: GraphQLNonNull(GraphQLString) },
-				// Id: { type: GraphQLNonNull(GraphQLInt) },
-			},
-			resolve: (parent, args) => {
-				const newImage = { Id: uuid.v4(), data: args.data };
-				addImageToDB(newImage);
-				return newImage;
-			},
-		},
-		addBook: {
-			type: BookTypeQL,
-			description: 'fcn to add book',
-			args: {
-				name: { type: GraphQLNonNull(GraphQLString) },
-				authorId: { type: GraphQLNonNull(GraphQLInt) },
-			},
-			resolve: (parent, args) => {
-				const newBook = { id: books.length + 1, name: args.name, authorId: args.authorId };
-				books.push(newBook); //bec we not using db rn, simple example
-				return newBook; //just to return successful book created
-			},
-		},
-	}),
-});
-
 const schemaComplex = new GraphQLSchema({
 	query: RootQuery,
 	mutation: RootMutationType,
+	// mutation: null,
 });
 
 app.use(
