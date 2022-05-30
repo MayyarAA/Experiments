@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useMutation, gql } from '@apollo/client';
 
 const PostUserSelectedImagesAPICall = () => {
@@ -16,24 +17,24 @@ const PostUserSelectedImagesAPICall = () => {
     
   }`);
 	const [userSelectedImagesMutation, { loading, error, data }] = useMutation(postImagesQuery);
-	// useEffect(() => {
-	userSelectedImagesMutation();
-	console.log('userSelectedImagesMutation');
-	// }, []);
+	useEffect(() => {
+		userSelectedImagesMutation();
+		console.log('userSelectedImagesMutation');
+	});
 
-	if (loading) {
-		console.log(loading);
-		while (loading) {
-			console.log(' in loading while loop');
-		}
-	}
-	// return 'Data is loading';
-	if (error) {
-		console.log(error);
-		return 'Error during request';
-	}
-	console.log(data);
-	return data;
+	// if (loading) {
+	// 	console.log(loading);
+	// 	while (loading) {
+	// 		console.log(' in loading while loop');
+	// 	}
+	// }
+	// // return 'Data is loading';
+	// if (error) {
+	// 	console.log(error);
+	// 	return 'Error during request';
+	// }
+	// console.log(JSON.stringify(data));
+	// return { userSelectedImagesMutation };
 };
 
 export { PostUserSelectedImagesAPICall };
