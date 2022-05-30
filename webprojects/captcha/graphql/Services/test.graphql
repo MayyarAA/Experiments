@@ -1,0 +1,52 @@
+query BookData {
+	message
+	books {
+		name
+		author {
+			name
+		}
+	}
+}
+
+query AuthorsData {
+	authors {
+		name
+	}
+}
+
+query SingleBook {
+	book(bookId: 2) {
+		name
+	}
+}
+
+query CaptchaImage {
+	captchaImage(Id: 1) {
+		Id
+	}
+}
+
+mutation addBook {
+	addBook(name: "Tommy Book", authorId: 10) {
+		name
+	}
+}
+
+mutation addCaptchaImage {
+	addCaptchaImage(data: "dataforimage") {
+		data
+	}
+}
+
+type CaptchaImageTypeQL {
+	Id: Int!
+	ImageValue: String
+	ImageData: String!
+}
+query getAllImages {
+	getImages(random: "11") {
+		Id
+		ImageData
+		ImageValue
+	}
+}

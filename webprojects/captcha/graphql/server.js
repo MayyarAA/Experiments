@@ -8,6 +8,7 @@ const RootQuery = require('./Queries/ImageQueries.js');
 const RootMutationType = require('./Mutations/ImageMutations.js');
 // console.log(JSON.stringify(RootQuery));
 const { graphqlHTTP } = require('express-graphql');
+const { getDateTime } = require('./Services/Utils.js');
 const uuid = require('uuid');
 const {
 	GraphQLSchema,
@@ -57,7 +58,7 @@ app.use(
 		graphiql: true,
 	})
 );
-app.listen(5000, () => console.log('App listing'));
+app.listen(5000, () => console.log('App listing ' + getDateTime()));
 
 // // declaring new graphQLschema
 // const schemaSimple = new GraphQLSchema({

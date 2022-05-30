@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const captchaImageSchema = new Schema(
 	{
-		data: { type: String, required: true },
+		ImageData: { type: String, required: true },
+		ImageValue: { type: String, required: true },
 		Id: { type: String, required: true },
 	},
 	{ collection: 'CaptchaImage' }
