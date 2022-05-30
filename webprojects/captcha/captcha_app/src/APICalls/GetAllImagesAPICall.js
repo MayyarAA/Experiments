@@ -23,7 +23,7 @@ const GetAllImagesAPICall = () => {
 		return 'Error during request';
 	}
 	setCurrentListOfAllImages(data.getImages);
-	console.log(data.getImages);
+	// console.log(data.getImages);
 	// return data;
 };
 

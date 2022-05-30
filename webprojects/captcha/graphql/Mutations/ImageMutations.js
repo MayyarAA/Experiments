@@ -6,6 +6,8 @@ const {
 	GraphQLInt,
 	GraphQLNonNull,
 	GraphQLID,
+	GraphQLInputObjectType,
+	graphqlSync,
 } = require('graphql');
 
 const {
@@ -21,11 +23,11 @@ const RootMutationType = new GraphQLObjectType({
 	description: 'root mutation obj',
 	fields: () => ({
 		addCaptchaImage: {
-			type: CaptchaImageTypeQL,
+			type: CaptchaImageTypeQL, //This is the return type of the request
 			description: 'fcn to add captchaimage',
 			args: {
 				// imageData: { type: CaptchaImageTypeQL },
-				Id: { type: GraphQLString },
+				Id: { type: GraphQLString }, //This is the input type for dynamic requests
 				ImageValue: { type: GraphQLString },
 				ImageData: { type: GraphQLString },
 			},
@@ -33,6 +35,7 @@ const RootMutationType = new GraphQLObjectType({
 				console.log(
 					' Id => ' + args.Id + ' ImageValue=> ' + args.ImageValue + ' @ ' + getDateTime()
 				);
+				console.log(args);
 				const newImage = {
 					Id: uuid.v4(),
 					ImageValue: args.ImageValue,
@@ -42,19 +45,68 @@ const RootMutationType = new GraphQLObjectType({
 				return newImage;
 			},
 		},
-		userSelectedImages: {
-			type: new GraphQLList(CaptchaImageTypeQL),
-			description: 'list of user selected images',
+		addCaptchaImageUsingInputType: {
+			type: CaptchaImageTypeQL, //This is the return type of the request
+			description: 'fcn to add addCaptchaImageUsingInputType',
 			args: {
-				dataInput: { type: GraphQLString },
+				// prettier-ignore
+				input: { type: CaptchaImageMutationInput }, //This is a unqiue input type for mutations
 			},
 			resolve: (parent, args) => {
-				console.log(`from userSelectedImages => ${args.dataInput} @ ${getDateTime()}`);
+				console.log(
+					' Id => ' +
+						args.input.Id +
+						' ImageValue=> ' +
+						args.input.ImageValue +
+						' @ ' +
+						getDateTime()
+				);
+				const newImage = {
+					Id: uuid.v4(),
+					ImageValue: args.input.ImageValue,
+					ImageData: args.input.ImageData,
+				};
+				addImageToDB(newImage);
+				// console.log(args.input.ImageData);
+				return newImage;
+			},
+		},
+		userSelectedImages: {
+			type: new GraphQLList(CaptchaImageTypeQL),
+			// type: GraphQLString,
+			description: 'list of user selected images',
+			args: {
+				dataInput: { type: new GraphQLList(CaptchaImageMutationInput) },
+			},
+			resolve: (parent, args) => {
+				console.log(
+					`from userSelectedImages => ${JSON.stringify(args.dataInput)} @ ${getDateTime()}`
+				);
 				return args.dataInput;
 			},
 		},
 	}),
 });
+
+// const CaptchaImageListInputType
+
+//specila input type for mutation
+const CaptchaImageMutationInput = new GraphQLInputObjectType({
+	name: 'CaptchaImageMutationInput',
+	description: 'Input payload for creating new image',
+	fields: () => ({
+		ImageData: {
+			type: GraphQLString,
+		},
+		ImageValue: {
+			type: GraphQLString,
+		},
+		Id: {
+			type: GraphQLString,
+		},
+	}),
+});
+
 const addImageToDB = async (image) => {
 	const ImageValue = image.ImageValue;
 	const ImageData = image.ImageData;

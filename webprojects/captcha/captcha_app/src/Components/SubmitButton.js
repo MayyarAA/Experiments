@@ -4,10 +4,11 @@ import ValidationService from '../Services/ValidationService.js';
 import { ValidationAPICall } from '../APICalls/ValidationAPICall.js';
 import { DataContext } from '../Context/Context.js';
 import GetImageService from '../Services/GetImageService.js';
+import { PostUserSelectedImagesService } from '../Services/PostUserSelectedImagesService.js';
 function SubmitButton(props) {
 	const { selectedImages } = useContext(DataContext);
-	GetImageService();
 	const submitButtonEventHandler = (event) => {
+		PostUserSelectedImagesService();
 		console.log('clickde button');
 		console.log('selectedImages => ' + selectedImages + ' ' + JSON.stringify(selectedImages));
 		// ValidationAPICall();
