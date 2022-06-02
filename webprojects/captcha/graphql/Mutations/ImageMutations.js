@@ -15,6 +15,7 @@ const {
 
 	captchaImages,
 } = require('../GraphQLTypes/ImageQLType');
+const { ValidationService } = require('../Services/ValidationService.js');
 const CaptchaImage = require('../Model/CaptchaImage.js');
 const uuid = require('uuid');
 const { getDateTime } = require('../Services/Utils.js');
@@ -32,10 +33,10 @@ const RootMutationType = new GraphQLObjectType({
 				ImageData: { type: GraphQLString },
 			},
 			resolve: (parent, args) => {
-				console.log(
-					' Id => ' + args.Id + ' ImageValue=> ' + args.ImageValue + ' @ ' + getDateTime()
-				);
-				console.log(args);
+				// console.log(
+				// 	' Id => ' + args.Id + ' ImageValue=> ' + args.ImageValue + ' @ ' + getDateTime()
+				// );
+				// console.log(args);
 				const newImage = {
 					Id: uuid.v4(),
 					ImageValue: args.ImageValue,
@@ -79,14 +80,25 @@ const RootMutationType = new GraphQLObjectType({
 				dataInput: { type: new GraphQLList(CaptchaImageMutationInput) },
 			},
 			resolve: (parent, args) => {
-				console.log(
-					`from userSelectedImages => ${JSON.stringify(args.dataInput)} @ ${getDateTime()}`
-				);
+				try {
+					const result = ValidationService(args.dataInput, orgList, getDateTime());
+					if (!result) throw new Error('Error invalid selection');
+					console.log('sucess valid selection');
+				} catch (e) {
+					console.log('error invalid selection');
+					return e;
+				}
+				console.log('result val => ' + result);
 				return args.dataInput;
 			},
 		},
 	}),
 });
+
+const orgList = [
+	{ ImageData: 'dataImage', ImageValue: '6544444imageValue', Id: '6544444' },
+	{ ImageData: 'dataImage222', ImageValue: '6544444imageValue222', Id: '6544444' },
+];
 
 // const CaptchaImageListInputType
 

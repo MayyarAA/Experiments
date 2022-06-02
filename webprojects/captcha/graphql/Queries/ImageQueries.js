@@ -27,7 +27,7 @@ const RootQuery = new GraphQLObjectType({
 			type: CaptchaImageTypeQL,
 			args: { Id: { type: GraphQLInt } },
 			resolve: (parent, args) => {
-				console.log('req made here => captchaImage');
+				// console.log('req made here => captchaImage');
 				// res = captchaImages.find((image) => image.Id == args.Id);
 				const images = getImageDBsService();
 				const image = images[0];
@@ -44,7 +44,7 @@ const RootQuery = new GraphQLObjectType({
 			resolve: (parent, args) => {
 				const images = getImageDBsService();
 				if (images !== null && images !== undefined) {
-					console.log(`from getImages p2=> ${JSON.stringify(images[0])} @ ${getDateTime()}`);
+					// console.log(`from getImages p2=> ${JSON.stringify(images[0])} @ ${getDateTime()}`);
 				}
 				return images;
 			},
