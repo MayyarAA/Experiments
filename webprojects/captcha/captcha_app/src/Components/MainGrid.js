@@ -33,22 +33,35 @@ function StandardImageList(props) {
 	// }
 	useEffect(() => {
 		console.log(currentListOfAllImages);
-		// setLocalImageList(currentListOfAllImages);
 	}, [currentListOfAllImages]);
+
+	const indexOfObject = (arr, Id) => {
+		arr.findIndex((object) => {
+			return object.id === Id;
+		});
+	};
+	let imageIdsMap = {};
 	const imageListClickHandler = (image) => {
-		console.log(selectedImages);
-		if (image.Id in selectedImages) {
+		console.log('before edit => ' + JSON.stringify(selectedImages));
+		if (image.Id in imageIdsMap) {
 			//image already in unselect it
+
 			let selectedImagesLocal = selectedImages;
-			delete selectedImagesLocal[image.Id];
+			selectedImagesLocal.splice(imageIdsMap[image.Id], 1);
 			setSelectedImages(selectedImagesLocal);
-			console.log('here now ' + image.Id);
+			// console.log('here now ' + image.Id);
 		} else {
+			imageIdsMap[image.Id] = selectedImages.length;
 			//add image to selected
 			let selectedImagesLocal = selectedImages;
-			selectedImagesLocal[image.Id] = new ImageObjectAPIVersion(image.Id, image.title);
+			selectedImagesLocal.push({
+				Id: image.Id,
+				ImageValue: image.ImageValue,
+				ImageData: image.ImageData,
+			});
 			setSelectedImages(selectedImagesLocal);
 		}
+		console.log('after edit => ' + JSON.stringify(selectedImages));
 	};
 	if (currentListOfAllImages !== null && currentListOfAllImages !== undefined) {
 		console.log(currentListOfAllImages);

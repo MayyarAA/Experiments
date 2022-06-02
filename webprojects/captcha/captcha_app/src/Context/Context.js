@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 const DataContext = createContext();
 
 const DataContextProvider = (props) => {
-	const [selectedImages, setSelectedImages] = useState({});
+	const [selectedImages, setSelectedImages] = useState([]);
 	const [currentListOfAllImages, setCurrentListOfAllImages] = useState([]);
 	return (
 		<DataContext.Provider

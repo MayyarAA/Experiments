@@ -8,28 +8,21 @@ import GetImageService from '../Services/GetImageService.js';
 import { PostUserSelectedImagesService } from '../Services/PostUserSelectedImagesService.js';
 import { PostUserSelectedImagesAPICall } from '../APICalls/PostUserSelectedImagesAPICall.js';
 
-const postImagesQuery = gql(`
-  mutation userSelectedImages{
-    userSelectedImages(dataInput:[{Id:"6544444",
-          ImageValue:"6544444imageValue",
-          ImageData:"dataImage" },{
-          Id:"6544444",
-          ImageValue:"6544444imageValue222",
-          ImageData:"dataImage222"
-      }]){
-      Id
-    }
-    
-  }`);
-
 function SubmitButton(props) {
+	const userSelection = [];
+	const postImagesQuery = gql(`mutation userSelectedImages($data:[CaptchaImageMutationInput]){
+		userSelectedImages(dataInput:$data){
+		  Id
+		}
+		
+	  }`);
 	const { selectedImages } = useContext(DataContext);
 	const [userSelectedImagesMutation, { loading, error, data }] = useMutation(postImagesQuery);
 	const submitButtonEventHandler = (event) => {
 		// PostUserSelectedImagesService();
 		event.preventDefault();
 		// const { userSelectedImagesMutation } = PostUserSelectedImagesAPICall();
-		userSelectedImagesMutation();
+		userSelectedImagesMutation({ variables: { data: selectedImages } });
 		// PostUserSelectedImagesAPICall();
 		console.log('clickde button');
 		console.log('selectedImages => ' + selectedImages + ' ' + JSON.stringify(selectedImages));
@@ -52,3 +45,11 @@ function SubmitButton(props) {
 }
 
 export { SubmitButton };
+
+// [{Id:"6544444",
+//           ImageValue:"6544444imageValue",
+//           ImageData:"dataImage" },{
+//           Id:"6544444",
+//           ImageValue:"6544444imageValue222",
+//           ImageData:"dataImage222"
+//       }]
