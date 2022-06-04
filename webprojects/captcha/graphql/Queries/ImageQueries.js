@@ -55,7 +55,7 @@ const RootQuery = new GraphQLObjectType({
 const getImageDBsService = () => {
 	let imageArr = FakeImages;
 	let imageArrV2 = [];
-	for (let i = 0; i < imageArr.length; i++) {
+	for (let i = 0; i < 9; i++) {
 		imageArrV2.push({ Id: i + 1, ImageValue: imageArr[i].img, ImageData: imageArr[i].title });
 	}
 	return imageArrV2;

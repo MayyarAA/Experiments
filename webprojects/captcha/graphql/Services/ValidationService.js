@@ -3,6 +3,7 @@ const ValidationService = (args, orgList, reqTime) => {
 	const correctSelectionMap = buildMap(orgList);
 	// const userSelectionMap = buildMap(orgList);
 	for (image in args) {
+		console.log(image);
 		if (!correctSelectionMap.includes(image.Id)) return false;
 	}
 	console.log('validation service');
@@ -11,7 +12,7 @@ const ValidationService = (args, orgList, reqTime) => {
 const buildMap = (list) => {
 	let imagesMap = [];
 	for (let i = 0; i < list.length; i++) {
-		console.log(list[i]);
+		// console.log(list[i]);
 		// imagesMap[list[i].Id] = list[i].Id;
 		imagesMap.push(list[i].Id);
 	}

@@ -81,6 +81,7 @@ const RootMutationType = new GraphQLObjectType({
 			},
 			resolve: (parent, args) => {
 				try {
+					console.log('args.dataInput => ' + JSON.stringify(args.dataInput));
 					const result = ValidationService(args.dataInput, orgList, getDateTime());
 					if (!result) throw new Error('Error invalid selection');
 					console.log('sucess valid selection');
