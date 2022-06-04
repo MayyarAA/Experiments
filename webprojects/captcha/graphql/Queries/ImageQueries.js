@@ -8,13 +8,9 @@ const {
 	GraphQLID,
 } = require('graphql');
 
-const {
-	CaptchaImageTypeQL,
-
-	captchaImages,
-} = require('../GraphQLTypes/ImageQLType');
+const { CaptchaImageTypeQL, captchaImages } = require('../GraphQLTypes/ImageQLType');
 const { getDateTime } = require('../Services/Utils.js');
-const { FakeImages } = require('../fakeData.js');
+const { getImagesService } = require('../Services/GetImageDBService.js');
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQuery',
 	description: 'Root Query',
@@ -27,11 +23,8 @@ const RootQuery = new GraphQLObjectType({
 			type: CaptchaImageTypeQL,
 			args: { Id: { type: GraphQLInt } },
 			resolve: (parent, args) => {
-				// console.log('req made here => captchaImage');
-				// res = captchaImages.find((image) => image.Id == args.Id);
-				const images = getImageDBsService();
+				const images = getImagesService();
 				const image = images[0];
-				// console.log(JSON.stringify(images));
 				// addToDB(res);
 				// CaptchaImage.save()
 				return image;
@@ -42,7 +35,7 @@ const RootQuery = new GraphQLObjectType({
 			description: 'list of all images',
 			args: { random: { type: GraphQLString } },
 			resolve: (parent, args) => {
-				const images = getImageDBsService();
+				const images = getImagesService();
 				if (images !== null && images !== undefined) {
 					// console.log(`from getImages p2=> ${JSON.stringify(images[0])} @ ${getDateTime()}`);
 				}
@@ -51,14 +44,5 @@ const RootQuery = new GraphQLObjectType({
 		},
 	}),
 });
-
-const getImageDBsService = () => {
-	let imageArr = FakeImages;
-	let imageArrV2 = [];
-	for (let i = 0; i < 9; i++) {
-		imageArrV2.push({ Id: i + 1, ImageValue: imageArr[i].img, ImageData: imageArr[i].title });
-	}
-	return imageArrV2;
-};
 
 module.exports = RootQuery;

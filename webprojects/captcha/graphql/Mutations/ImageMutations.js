@@ -10,11 +10,7 @@ const {
 	graphqlSync,
 } = require('graphql');
 
-const {
-	CaptchaImageTypeQL,
-
-	captchaImages,
-} = require('../GraphQLTypes/ImageQLType');
+const { CaptchaImageTypeQL, captchaImages } = require('../GraphQLTypes/ImageQLType');
 const { ValidationService } = require('../Services/ValidationService.js');
 const CaptchaImage = require('../Model/CaptchaImage.js');
 const uuid = require('uuid');
@@ -27,7 +23,6 @@ const RootMutationType = new GraphQLObjectType({
 			type: CaptchaImageTypeQL, //This is the return type of the request
 			description: 'fcn to add captchaimage',
 			args: {
-				// imageData: { type: CaptchaImageTypeQL },
 				Id: { type: GraphQLString }, //This is the input type for dynamic requests
 				ImageValue: { type: GraphQLString },
 				ImageData: { type: GraphQLString },
@@ -54,21 +49,12 @@ const RootMutationType = new GraphQLObjectType({
 				input: { type: CaptchaImageMutationInput }, //This is a unqiue input type for mutations
 			},
 			resolve: (parent, args) => {
-				console.log(
-					' Id => ' +
-						args.input.Id +
-						' ImageValue=> ' +
-						args.input.ImageValue +
-						' @ ' +
-						getDateTime()
-				);
 				const newImage = {
 					Id: uuid.v4(),
 					ImageValue: args.input.ImageValue,
 					ImageData: args.input.ImageData,
 				};
 				addImageToDB(newImage);
-				// console.log(args.input.ImageData);
 				return newImage;
 			},
 		},
