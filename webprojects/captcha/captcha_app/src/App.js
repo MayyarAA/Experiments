@@ -9,8 +9,7 @@ function App() {
 	return (
 		<DataContextProvider>
 			<ApolloProvider client={ApolloClientCaptcha}>
-				<div className='App'>
-					{/* <ExchangeRates /> */}
+				<div style={{ display: 'flex', justifyContent: 'center' }}>
 					<CaptchaMainPage />
 				</div>
 			</ApolloProvider>

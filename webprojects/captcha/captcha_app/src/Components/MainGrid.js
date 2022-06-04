@@ -4,19 +4,14 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { DataContext } from '../Context/Context.js';
 import { GetAllImagesService } from '../Services/GetAllImagesService.js';
 export default function MainGrid() {
-	console.log('Here from MainGrid');
+	// console.log('Here from MainGrid');
 	GetAllImagesService();
 	return (
 		<div>
-			Here from MainGrid
 			<StandardImageList />
 		</div>
 	);
 }
-const imageObj = {
-	Id: 11111,
-	title: 'big image',
-};
 
 function ImageObjectAPIVersion(Id, imageTitle) {
 	this.Id = Id;

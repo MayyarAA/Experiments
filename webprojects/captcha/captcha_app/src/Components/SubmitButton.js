@@ -32,6 +32,7 @@ function SubmitButton(props) {
 	let button = (
 		<div>
 			<Button
+				style={{ float: 'right' }}
 				variant='outlined'
 				onClick={(event) => {
 					submitButtonEventHandler(event);
