@@ -2,45 +2,20 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const connectDB = require('./config/database.js');
-const { authors, books } = require('./fakeData.js');
-const CaptchaImage = require('./Model/CaptchaImage.js');
 const RootQuery = require('./Queries/ImageQueries.js');
 const RootMutationType = require('./Mutations/ImageMutations.js');
-// console.log(JSON.stringify(RootQuery));
 const { graphqlHTTP } = require('express-graphql');
 const { getDateTime } = require('./Services/Utils.js');
 const uuid = require('uuid');
-const {
-	GraphQLSchema,
-	GraphQLObjectType,
-	GraphQLString,
-	GraphQLList,
-	GraphQLInt,
-	GraphQLNonNull,
-	GraphQLID,
-} = require('graphql');
+const { GraphQLSchema } = require('graphql');
 
-//queries
 connectDB();
 
-//mutations
-
-const addImageToDB = async (image) => {
-	const data = image.data;
-	const Id = image.Id;
-	console.log(JSON.stringify(image));
-	const newImage = CaptchaImage({ data, Id });
-	try {
-		await newImage.save();
-	} catch (e) {
-		throw new Error('error unable to save image => ' + e);
-	}
-};
-
 const schemaComplex = new GraphQLSchema({
+	//queries
 	query: RootQuery,
+	//mutations
 	mutation: RootMutationType,
-	// mutation: null,
 });
 
 app.use(
@@ -59,17 +34,3 @@ app.use(
 	})
 );
 app.listen(5000, () => console.log('App listing ' + getDateTime()));
-
-// // declaring new graphQLschema
-// const schemaSimple = new GraphQLSchema({
-// 	//declaring new graphQLobj
-// 	query: new GraphQLObjectType({
-// 		name: 'FirstGraphQLObjs',
-// 		fields: () => ({
-// 			message: {
-// 				type: GraphQLString,
-// 				resolve: () => 'First GraphQLSchemaObj',
-// 			},
-// 		}),
-// 	}),
-// });
