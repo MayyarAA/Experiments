@@ -4,7 +4,8 @@ const { SaveToPersistantDataStoreService } = require('./SaveToPersistantDataStor
 
 const getImagesService = () => {
 	let imageArr = getRandomValues(FakeImages, 9);
-	SaveToPersistantDataStoreService(imageArr);
+	let correctSubSetOfImages = getRandomValues(imageArr, 3);
+	SaveToPersistantDataStoreService(correctSubSetOfImages);
 	let imageArrV2 = [];
 	for (let i = 0; i < 9; i++) {}
 	return imageArr;
