@@ -26,7 +26,7 @@ function StandardImageList(props) {
 	// useEffect(() => {}, []);
 
 	useEffect(() => {
-		console.log(currentListOfAllImages);
+		// console.log(currentListOfAllImages);
 	}, [currentListOfAllImages]);
 
 	const indexOfObject = (arr, Id) => {
@@ -36,7 +36,7 @@ function StandardImageList(props) {
 	};
 	let imageIdsMap = {};
 	const imageListClickHandler = (image) => {
-		console.log('before edit => ' + JSON.stringify(selectedImages));
+		// console.log('before edit => ' + JSON.stringify(selectedImages));
 		if (image.Id in imageIdsMap) {
 			//image already in unselect it
 			let selectedImagesLocal = selectedImages;
@@ -53,7 +53,7 @@ function StandardImageList(props) {
 			});
 			setSelectedImages(selectedImagesLocal);
 		}
-		console.log('after edit => ' + JSON.stringify(selectedImages));
+		// console.log('after edit => ' + JSON.stringify(selectedImages));
 	};
 	if (currentListOfAllImages !== null && currentListOfAllImages !== undefined) {
 		// console.log(currentListOfAllImages);

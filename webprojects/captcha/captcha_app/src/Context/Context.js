@@ -5,6 +5,7 @@ const DataContext = createContext();
 const DataContextProvider = (props) => {
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [currentListOfAllImages, setCurrentListOfAllImages] = useState([]);
+	const [statusOfValidation, setStatusOfValidation] = useState('Pending');
 	const getAllImagesContextService = () => {
 		setCurrentListOfAllImages(GetAllImagesService());
 	};
@@ -17,6 +18,8 @@ const DataContextProvider = (props) => {
 				currentListOfAllImages,
 				setCurrentListOfAllImages,
 				getAllImagesContextService,
+				statusOfValidation,
+				setStatusOfValidation,
 			}}>
 			{props.children}
 		</DataContext.Provider>

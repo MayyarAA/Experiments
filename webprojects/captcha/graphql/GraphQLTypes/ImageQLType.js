@@ -18,9 +18,4 @@ const CaptchaImageTypeQL = new GraphQLObjectType({
 	}),
 });
 
-const captchaImages = [
-	{ Id: 1, data: 'datastring' },
-	{ Id: 2, data: 'datastring2' },
-];
-
-module.exports = { CaptchaImageTypeQL, captchaImages };
+module.exports = { CaptchaImageTypeQL };

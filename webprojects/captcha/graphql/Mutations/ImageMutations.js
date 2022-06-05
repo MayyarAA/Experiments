@@ -10,7 +10,7 @@ const {
 	graphqlSync,
 } = require('graphql');
 
-const { CaptchaImageTypeQL, captchaImages } = require('../GraphQLTypes/ImageQLType');
+const { CaptchaImageTypeQL } = require('../GraphQLTypes/ImageQLType');
 const { ValidationService } = require('../Services/ValidationService.js');
 const CaptchaImage = require('../Model/CaptchaImage.js');
 const uuid = require('uuid');
@@ -66,26 +66,29 @@ const RootMutationType = new GraphQLObjectType({
 				dataInput: { type: new GraphQLList(CaptchaImageMutationInput) },
 			},
 			resolve: (parent, args) => {
+				let graphQLRespone = [];
 				try {
 					// console.log('args.dataInput => ' + JSON.stringify(args.dataInput));
 					const result = ValidationService(args.dataInput, getDateTime());
 					if (!result) throw new Error('Error invalid selection');
+					graphQLRespone = buildUserSelectedImagesResponse(result);
 					console.log('sucess valid selection');
 				} catch (e) {
 					console.log('error invalid selection');
 					return e;
 				}
-				console.log('result val => ' + result);
-				return args.dataInput;
+				console.log('result val => ' + JSON.stringify(graphQLRespone));
+				return graphQLRespone;
 			},
 		},
 	}),
 });
 
-const orgList = [
-	{ ImageData: 'dataImage', ImageValue: '6544444imageValue', Id: '6544444' },
-	{ ImageData: 'dataImage222', ImageValue: '6544444imageValue222', Id: '6544444' },
-];
+const buildUserSelectedImagesResponse = (data) => {
+	console.log(JSON.stringify(data));
+	let res = [{ ImageData: 'Correct', ImageValue: 'Correct', Id: 'Correct' }];
+	return res;
+};
 
 // const CaptchaImageListInputType
 

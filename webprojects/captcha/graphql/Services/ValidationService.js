@@ -5,7 +5,7 @@ const ValidationService = (userSelectedImages, reqTime) => {
 		const image = userSelectedImages[i];
 		// console.log('user sel imag' + JSON.stringify(image));
 		if (!correctSelectionMap.includes(image.Id)) {
-			console.log('user sel imag id ' + typeof image.Id);
+			// console.log('user sel imag id ' + typeof image.Id);
 			return false;
 		}
 	}
