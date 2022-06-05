@@ -3,7 +3,7 @@ const GetAllImagesService = () => {
 	// const listOfImages = GetAllImagesAPICall();
 	// console.log(listOfImages);
 	// return listOfImages;
-	GetAllImagesAPICall();
+	return GetAllImagesAPICall();
 };
 
 export { GetAllImagesService };

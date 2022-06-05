@@ -3,12 +3,13 @@ import Button from '@mui/material/Button';
 import { useMutation, gql } from '@apollo/client';
 import { DataContext } from '../Context/Context.js';
 
-function SubmitButton(props) {
+const CancelButton = (props) => {
 	const userSelection = [];
-	const { selectedImages } = useContext(DataContext);
+	const { selectedImages, setSelectedImages } = useContext(DataContext);
 
 	const submitButtonEventHandler = (event) => {
 		console.log('clickde button');
+		setSelectedImages([]);
 		console.log('selectedImages => ' + selectedImages + ' ' + JSON.stringify(selectedImages));
 	};
 	let button = (
@@ -19,12 +20,12 @@ function SubmitButton(props) {
 				onClick={(event) => {
 					submitButtonEventHandler(event);
 				}}>
-				Submit
+				Cancel
 			</Button>
 		</div>
 	);
 
 	return <div>{button}</div>;
-}
+};
 
-export { SubmitButton };
+export { CancelButton };

@@ -1,9 +1,9 @@
 import { useQuery, gql } from '@apollo/client';
-import { useContext } from 'react';
-import { DataContext } from '../Context/Context.js';
+// import { useContext } from 'react';
+// import { DataContext } from '../Context/Context.js';
 const GetAllImagesAPICall = () => {
-	const { setCurrentListOfAllImages } = useContext(DataContext);
-	console.log('GetAllImagesAPICall ');
+	// const { setCurrentListOfAllImages } = useContext(DataContext);
+	// console.log('GetAllImagesAPICall ');
 	const getImagesQuery = gql(`
     query getAllImages {
         getImages(random:"11111"){
@@ -14,7 +14,7 @@ const GetAllImagesAPICall = () => {
       }`);
 	const { loading, error, data } = useQuery(getImagesQuery);
 	if (loading) {
-		console.log('loading => ' + loading);
+		// console.log('loading => ' + loading);
 		// 	// while (loading) {}
 		return;
 	}
@@ -22,9 +22,10 @@ const GetAllImagesAPICall = () => {
 		console.log(error);
 		return 'Error during request';
 	}
-	setCurrentListOfAllImages(data.getImages);
+	// setCurrentListOfAllImages(data.getImages);
 	// console.log(data.getImages);
 	// return data;
+	return data.getImages;
 };
 
 export { GetAllImagesAPICall };

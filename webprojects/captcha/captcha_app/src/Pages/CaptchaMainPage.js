@@ -1,7 +1,12 @@
+import { useEffect, useContext } from 'react';
 import MainGrid from '../Components/MainGrid.js';
 import { SubmitButton } from '../Components/SubmitButton.js';
+import { CancelButton } from '../Components/CancelButton.js';
+import { RefreshButton } from '../Components/RefreshButton.js';
 import { HeaderComponent } from '../Components/Header.js';
+import { GetAllImagesService } from '../Services/GetAllImagesService.js';
 import { Grid, Box } from '@mui/material';
+
 function CaptchaMainPage() {
 	return (
 		<div>
@@ -16,9 +21,18 @@ function CaptchaMainPage() {
 							<MainGrid />
 						</Box>
 
-						<Grid item justify='right'>
+						<Box
+							component='span'
+							m={1}
+							display='flex'
+							justifyContent='space-between'
+							alignItems='center'>
+							<CancelButton />
+							<RefreshButton />
 							<SubmitButton />
-						</Grid>
+						</Box>
+
+						<Grid item justify='right'></Grid>
 					</Grid>
 				</Grid>
 			</div>

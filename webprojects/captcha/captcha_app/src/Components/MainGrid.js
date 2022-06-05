@@ -4,8 +4,6 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { DataContext } from '../Context/Context.js';
 import { GetAllImagesService } from '../Services/GetAllImagesService.js';
 export default function MainGrid() {
-	// console.log('Here from MainGrid');
-	GetAllImagesService();
 	return (
 		<div>
 			<StandardImageList />
@@ -18,14 +16,15 @@ function ImageObjectAPIVersion(Id, imageTitle) {
 	this.imageTitle = imageTitle;
 }
 function StandardImageList(props) {
-	const { selectedImages, setSelectedImages, currentListOfAllImages } = useContext(
-		DataContext
-	);
-	const [localImageList, setLocalImageList] = useState([]);
+	const {
+		selectedImages,
+		setSelectedImages,
+		currentListOfAllImages,
+		setCurrentListOfAllImages,
+	} = useContext(DataContext);
+	setCurrentListOfAllImages(GetAllImagesService());
+	// useEffect(() => {}, []);
 
-	// if (currentListOfAllImages === null || currentListOfAllImages === undefined) {
-	// 	GetAllImagesService();
-	// }
 	useEffect(() => {
 		console.log(currentListOfAllImages);
 	}, [currentListOfAllImages]);
@@ -40,11 +39,9 @@ function StandardImageList(props) {
 		console.log('before edit => ' + JSON.stringify(selectedImages));
 		if (image.Id in imageIdsMap) {
 			//image already in unselect it
-
 			let selectedImagesLocal = selectedImages;
 			selectedImagesLocal.splice(imageIdsMap[image.Id], 1);
 			setSelectedImages(selectedImagesLocal);
-			// console.log('here now ' + image.Id);
 		} else {
 			imageIdsMap[image.Id] = selectedImages.length;
 			//add image to selected
@@ -59,26 +56,26 @@ function StandardImageList(props) {
 		console.log('after edit => ' + JSON.stringify(selectedImages));
 	};
 	if (currentListOfAllImages !== null && currentListOfAllImages !== undefined) {
-		console.log(currentListOfAllImages);
+		// console.log(currentListOfAllImages);
 		return (
-			<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-				{currentListOfAllImages.map((item, i) => (
-					<ImageListItem
-						key={item.img}
-						onClick={() => {
-							// console.log(props.itemData[i]);
-							// console.log(item);
-							imageListClickHandler(item);
-						}}>
-						<img
-							src={`${item.ImageValue}?w=164&h=164&fit=crop&auto=format`}
-							srcSet={`${item.ImageValue}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-							alt={item.ImageData}
-							loading='lazy'
-						/>
-					</ImageListItem>
-				))}
-			</ImageList>
+			<div>
+				<ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
+					{currentListOfAllImages.map((item, i) => (
+						<ImageListItem
+							key={item.img}
+							onClick={() => {
+								imageListClickHandler(item);
+							}}>
+							<img
+								src={`${item.ImageValue}?w=164&h=164&fit=crop&auto=format`}
+								srcSet={`${item.ImageValue}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+								alt={item.ImageData}
+								loading='lazy'
+							/>
+						</ImageListItem>
+					))}
+				</ImageList>
+			</div>
 		);
 	} else {
 		return <div> Buffering </div>;
