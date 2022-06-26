@@ -1,0 +1,66 @@
+1933. Check if String Is Decomposable Into Value-Equal Substrings
+
+class Solution {
+    public boolean isDecomposable(String s) {
+        //sort the arr
+        //while able to split into 3 continue        
+        int[] arr = new int[s.length()];
+        for(int i=0;i<arr.length;i++){
+            arr[i]= Character.getNumericValue(s.charAt(i));
+        }
+        if(arr.length==2 && arr[0]==arr[1])return true;        
+        if(arr.length<=4 ) return false; 
+        int left=0;
+        int right=1;
+        boolean foundTwo=false;
+        while(right<arr.length){
+            if(right==arr.length-1){
+                    right++;
+                    break;
+            }
+            if(!foundTwo){
+                if(right<arr.length-1 && arr[left]==arr[right]){
+                }else{
+                    if(right-left==2||((right-left)-2)%3==0){//(8-3)
+                        //first 2len
+                        foundTwo=true;//true at right=8
+                    }else if((right-left)%3==0){//3-0
+                        //still okay
+                    }else{
+                        return false;
+                    }
+                    left=right;//3,8
+                }                                
+            }else{                
+                //can only be len3
+                if(right<arr.length-1 && arr[left]==arr[right]){//11-8
+                }else if((right-left)%3==0){
+                    left=right;//11
+                }else{
+                    return false;
+                }
+                
+            }
+            right++;//2,3(no longer same),4,8(!=),9,11(!=),12
+        }
+        //check end,left=11,right=14
+        if(!foundTwo){
+            if(right-left==2||((right-left)-2)%3==0){
+            }else{
+                return false;//len 2 never found
+            }
+        }else{
+            if((right-left)%3!=0){                
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+/**
+subStr1.length==2, else ==3
+
+**
+
+
