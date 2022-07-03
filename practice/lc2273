@@ -1,0 +1,47 @@
+class Solution {
+    public List<String> removeAnagrams(String[] words) {
+        List<String> res = new ArrayList<>();
+        if(words.length==1){
+            res.add(words[0]);
+            return res;
+        }
+        String[] sortedWords = new String[words.length];
+        for(int i=0;i<words.length;i++){
+            char[] tempArr = words[i].toCharArray();
+            Arrays.sort(tempArr);
+            sortedWords[i] = new String(tempArr);
+        }
+        // System.out.println(Arrays.toString(sortedWords));
+        int left=0;
+        int right=1;
+        // HashSet<Integer>
+        while(right<words.length){            
+            String word1 = sortedWords[left];
+            String word2 = sortedWords[right];
+            if(word1.compareTo(word2)==0){
+                if(right-left==1)res.add(words[left]);   
+                
+            }else{
+                if(right-left==1){                    
+                    res.add(words[left]);                    
+                }
+                if(right==words.length-1)res.add(words[right]);
+                // if(res.size()>=1&& res.get(res.size()-1).compareTo(words[left])!=0){
+                //     res.add(words[left]);
+                // }                
+                left=right;                
+            }
+            right++;
+            // if(left==right)right++;
+        }
+        return res;
+    }
+}
+/**
+anagram?? => smae# of words
+make sure to remove words[i], anagram must but words[i]==words[i-1]
+
+//sort each str, then compare each char
+or
+//create map for each str,<char,int>
+**/
