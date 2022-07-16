@@ -1,0 +1,54 @@
+class Solution {
+    public boolean strongPasswordCheckerII(String password) {
+        if(password.length()<8)return false;
+        if(!checkAtLeastOne(password, "lowerCase")){
+            return false;
+        }
+        if(!checkAtLeastOne(password, "upperCase")){
+            return false;
+        }
+        if(!checkAtLeastOne(password, "digit")){
+            return false;
+        }
+        if(!checkAtLeastOne(password, "specialChar")){
+            return false;
+        }
+        if(!checkAdjust(password)){
+           return false; 
+        }
+        return true;
+    }
+    boolean checkAdjust(String pwd){
+        char[] arr = pwd.toCharArray();
+        for(int i=0;i<arr.length-1;i++){
+            if(Character.compare(arr[i],arr[i+1])==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    boolean checkAtLeastOne(String pwd, String type){
+        char[] arr = pwd.toCharArray();
+        int count =0;
+        HashSet<Character> set = new HashSet<>();
+        buildSet(set);
+        for(char ch: arr){
+            if(Character.isLowerCase(ch) && type.compareTo("lowerCase") ==0){
+                count++;
+            }else if(Character.isUpperCase(ch) && type.compareTo("upperCase") ==0){
+                count++;
+            }else if(Character.isDigit(ch) && type.compareTo("digit") ==0){
+                count++;
+            }else if(set.contains(ch) && type.compareTo("specialChar") ==0){
+                count++;
+            }            
+        }        
+        return count>0?true:false;
+    }
+    void buildSet(HashSet<Character> set){
+        String str = "!@#$%^&*()-+";
+        for(char ch: str.toCharArray()){
+            set.add(ch);
+        }        
+    }
+}
