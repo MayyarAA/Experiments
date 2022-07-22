@@ -1,0 +1,46 @@
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int res=0;
+        // int[] baskets = new int[2];
+        //<fruit, count>
+        HashMap<Integer, Integer> baskets =new HashMap<Integer,Integer>();        
+        int left=0;
+        int right=0;
+        while(right< fruits.length){
+            int currFruit = fruits[right];
+            //basket full & new fruit => move left
+            if(baskets.size()>=2 && !baskets.containsKey(currFruit)){
+                baskets.put(fruits[left], baskets.get(fruits[left])-1);
+                if(baskets.get(fruits[left])==0)baskets.remove(fruits[left]);
+                left++;
+            }else{
+                //good case
+                baskets.put(currFruit, baskets.getOrDefault(currFruit,0)+1);//add to basket
+                res = Math.max(res, getBasketsSize(baskets));
+                right++;
+            }
+        }
+        return res;
+    }
+    int getBasketsSize(HashMap<Integer, Integer> baskets){
+        int res=0;
+        for(int key: baskets.keySet()){
+            res+=baskets.get(key);
+        }
+        return res;
+    }
+}
+/**
+max consecutive 2 unqiue values
+[1,2,3,2,2,4,1,1,4,5]
+while arr[i] === basket[1] || basket[2]
+
+it r==0
+<<1,1>,<>>
+it r==1
+<<1,1>,<2,1>>
+it r==2,l=1
+<<1,0>,<2,1>>
+it r==2,l=1
+<<3,0>,<2,1>>
+**/
