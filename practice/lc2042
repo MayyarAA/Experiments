@@ -1,0 +1,26 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        String[] arr = parseString(s);
+        int prev =-1;
+        for(String str:arr){            
+            if(!isNumeric(str)){
+                continue;
+            }
+            
+            int val = Integer.parseInt(str);
+            
+            if(val<=prev){
+                return false;
+            }   
+            prev = val; 
+            
+        }
+        return true;
+    }
+    public boolean isNumeric(String s) {  
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
+    }  
+    String[] parseString(String s){
+        return s.split(" ");
+    }
+}
