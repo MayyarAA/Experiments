@@ -1,0 +1,34 @@
+class Solution {
+    public String decodeMessage(String key, String message) {
+        //convert key into alphabet map
+        //building map => if not in map assign alpha value based on occur order
+        //take char in message use key map to convert
+        
+        StringBuilder strB = new StringBuilder();
+        HashMap<Character, Character> map = buildMap(key);
+        char[] arr = message.toCharArray();
+        for(char ch: arr){
+            strB.append(map.get(ch));
+        }
+        return strB.toString();
+    }
+    
+    HashMap<Character, Character> buildMap(String key){
+        HashMap<Character, Character> map = new HashMap<Character, Character>();
+        char[] arr = key.toCharArray();
+        char[] alphaIndex = buildAlphaIndex();
+        int counter=0;
+        for(char ch: arr){
+            if(map.containsKey(ch) || ch == ' ') continue;            
+            map.put(ch, alphaIndex[counter]);
+            counter++;
+        }
+        map.put(' ', ' ');
+        return map;
+    }
+    char[] buildAlphaIndex(){        
+        String letters = "abcdefghijklmnopqrstuvwxyz";
+        char[] arr = letters.toCharArray();
+        return arr;
+    } 
+}
