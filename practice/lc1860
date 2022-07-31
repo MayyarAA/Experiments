@@ -1,0 +1,35 @@
+class Solution {
+    class ComputerObj{
+        // int m1;
+        // int m2;
+        // boolean isAlive;
+        // int currT;
+        // ComputerObj(int m1, int m2, boolean isAlive, int currT)
+    }
+    public int[] memLeak(int memory1, int memory2) {
+        
+        /**
+        at t remove t bits from bigger stick
+        **/
+                
+        boolean alive = true;
+        int[] computer = new int[3];
+        computer[0]=1;computer[1]=memory1;computer[2]=memory2;
+        while(alive){
+            alive =  allocateMemory(computer);            
+        }
+        return computer;
+    }
+    boolean allocateMemory(int[] computer){
+        if(computer[0]>computer[1] && computer[0]>computer[2]) return false;
+        if(computer[1]>=computer[2]){
+            computer[1]-= computer[0];
+        }else if(computer[1]<computer[2]){
+            computer[2]-= computer[0];
+        }else{
+            return false;
+        }
+        computer[0]++;
+        return true;
+    }
+}
