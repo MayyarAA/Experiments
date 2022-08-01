@@ -1,0 +1,28 @@
+class Solution {
+    public int countAsterisks(String s) {
+        int res=0;
+        /**        
+        iterate through each char, 
+        maintain a boolean if you have a | looking for pair
+        if true do not count *
+        o/w count *
+        edge case if you are at last | w/0 pair do count those *
+        **/        
+        boolean leftBar= false;
+        for(char ch: s.toCharArray()){
+            if(leftBar){
+                if(Character.compare(ch,'|')==0){
+                    leftBar=false;//found its matching pair
+                }
+            }else{
+                //count *
+                if(Character.compare(ch,'|')==0){
+                    leftBar=true;
+                }else{
+                    if(Character.compare(ch,'*')==0) res++;
+                }
+            }            
+        }
+        return res;
+    }
+}
