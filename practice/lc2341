@@ -1,0 +1,25 @@
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+        int[] res = new int[2];
+        /**
+        map<val,List<indexes>>
+        iterate over map & remove pairs from indexes
+        <1,[0,3],>
+        **/
+        HashMap<Integer,List<Integer>> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            List<Integer> list = map.getOrDefault(nums[i], new ArrayList<Integer>());
+            list.add(nums[i]);
+            map.put(nums[i], list);
+        }
+        // int remaining=0;
+        for(int key:map.keySet()){
+            List<Integer> list = map.get(key);
+            int numOfPairs = list.size()/2;
+            int remaining = list.size()%2;
+            res[0]+=numOfPairs;
+            res[1]+=remaining;
+        }
+        return res;
+    }
+}
