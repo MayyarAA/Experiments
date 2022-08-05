@@ -1,0 +1,33 @@
+class Solution {
+    public String bestHand(int[] ranks, char[] suits) {
+        //
+        if(isFlush(suits)) return "Flush";
+        if(isThreeOfAKind(ranks)) return "Three of a Kind";
+        if(isPair(ranks)) return "Pair";        
+        return "High Card";
+    }
+    boolean isFlush(char[] suits){
+        for(int i=0;i<suits.length-1;i++){
+            if(suits[i]!=suits[i+1]) return false;
+        }
+        return true;
+    }
+    
+    boolean isThreeOfAKind(int[] ranks){
+        int[] arr = new int[13+1];
+        for(int i=0;i<ranks.length;i++){
+            arr[ranks[i]]++;
+            if(arr[ranks[i]]>=3) return true;
+        }
+        return false;
+    }
+    
+    boolean isPair(int[] ranks){
+        int[] arr = new int[13+1];
+        for(int i=0;i<ranks.length;i++){
+            arr[ranks[i]]++;
+            if(arr[ranks[i]]>=2) return true;
+        }
+        return false;
+    }
+}
