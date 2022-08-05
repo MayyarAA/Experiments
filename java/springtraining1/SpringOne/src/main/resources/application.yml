@@ -5,6 +5,10 @@ management:
                 include: "*"
     security:
         enabled: false
+server:
+    ssl:
+        key-store: classpath:keystore.jks
+
 ---
 spring:
     profiles: dev
