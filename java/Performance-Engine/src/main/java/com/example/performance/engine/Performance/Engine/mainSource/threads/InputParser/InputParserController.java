@@ -15,7 +15,7 @@ import java.util.HashMap;
 @RequestMapping("/api/v1/inputparser")
 public class InputParserController {
     Logger logger = LoggerFactory.getLogger(InputParserController.class);
-    InputParserFileServices inputParserFileService = new InputParserFileServices();
+    InputParserFileServices inputParserFileService = new InputParserFileServices(new File(""));
     class InputParserOutput{
         String value;
         public  InputParserOutput(String value){
@@ -23,11 +23,9 @@ public class InputParserController {
         }
     }
     @PostMapping(path = "submit/file")
-    public  InputParserOutput submitFilePost(){
-        inputParserFileService.parseAndReturnFileData(new File("file"));
-        InputParserOutput temp = new InputParserOutput("hello from inputparser");
-        logger.info("Request received to submitFilePost");
-        return temp;
+    public  ResponseEntity<HashMap<String, HashMap<String, String>>> submitFilePost(){
+        HashMap<String, HashMap<String,String>> res = inputParserFileService.parseAndReturnFileData();
+        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(res);
     }
     @GetMapping (path = "file")
     public  ResponseEntity<HashMap<String, String>> getFile(){
