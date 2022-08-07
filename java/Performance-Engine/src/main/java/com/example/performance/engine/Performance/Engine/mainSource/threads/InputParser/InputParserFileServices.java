@@ -41,8 +41,9 @@ public class InputParserFileServices {
                 + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
         for (int j = 0; j < arr.length; j++) {
-            StringBuilder sb = new StringBuilder(rand.nextInt(56));
-            for (int i = 0; i < sb.length(); i++) {
+            int lengthOfWord = rand.nextInt(56);
+            StringBuilder sb = new StringBuilder(lengthOfWord);
+            for (int i = 0; i < lengthOfWord; i++) {
                 int index = (int) (AlphaNumericString.length()
                         * Math.random());
 
