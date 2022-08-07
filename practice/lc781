@@ -1,0 +1,39 @@
+class Solution {
+    public int numRabbits(int[] answers) {
+        /**
+        min # of rabbits
+        [1,1,2,2,1]
+        min up to this point
+        if we found the same # before && the # is <= # of occurances then maintain same count
+        **/
+        int minNumOfRabbits=0;//2,(2+0),(2+3),(5+0)
+        //<#ofOccurance, listOfSame#OfOccurances>
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        for(int i=0;i<answers.length;i++){
+            int numOfOccurances = answers[i];//1,1,2
+            List<Integer> numOfOccurancesOfColour = map
+                .getOrDefault(numOfOccurances, new ArrayList<Integer>());
+            //firstOccurance
+            if(numOfOccurancesOfColour.size()==0){
+                numOfOccurancesOfColour.add(1);//<1,2>
+                minNumOfRabbits+=numOfOccurances+1;//atleast n+1 rabbits//2
+            }else{
+                // if the # of occurances has been more than the # of occurances start a 
+                //new occurance
+                if(numOfOccurancesOfColour
+                   .get(numOfOccurancesOfColour.size()-1)<=numOfOccurances){//1<=1,1<=2,2<=1
+                    minNumOfRabbits+=0;//# of occurances of this occurance is < occurance value
+                    numOfOccurancesOfColour
+                        .set(numOfOccurancesOfColour.size()-1,
+                             numOfOccurancesOfColour
+                             .get(numOfOccurancesOfColour.size()-1)+1);//add to the count of occurances
+                }else{
+                    minNumOfRabbits+=numOfOccurances+1;//new occurance of a colour, overOccured
+                    numOfOccurancesOfColour.add(1);
+                }
+            }
+            map.put(numOfOccurances,numOfOccurancesOfColour);//<<1,[2,1]>,2,[1]>
+        }
+        return minNumOfRabbits;
+    }
+}
