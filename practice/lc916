@@ -1,0 +1,57 @@
+class Solution {
+    public List<String> wordSubsets(String[] words1, String[] words2) {
+        /**
+        hashmap for each words1
+        if same hashmpa make it
+        **/
+        int[][] mapOfWords1 = new int[words1.length][];
+        int[][] mapOfWords2 = new int[words2.length][];
+        int[] universalWords1 = new int[words1.length];
+        ArrayList<String> list = new ArrayList<>();
+        for(int i=0;i<words1.length;i++){
+            char[] letters = words1[i].toCharArray();
+            int[] occurances = new int[26];
+            for(char ch: letters){
+                occurances[(ch-'a')]++;
+            }
+            // System.out.println(Arrays.toString(occurances));
+            mapOfWords1[i] = occurances;
+        }
+        for(int i=0;i<words2.length;i++){
+            char[] letters2 = words2[i].toCharArray();
+            int[] occurances2 = new int[26];            
+            for(char ch: letters2){
+                occurances2[(ch-'a')]++;
+            }
+            mapOfWords2[i]=occurances2;
+        }
+        
+            for(int k =0;k<mapOfWords1.length;k++){
+                int[] occurances1 = mapOfWords1[k];                
+                for(int j=0;j<words2.length;j++){
+                    int count=0;
+                    int[] occurances2 = mapOfWords2[j];
+                    if(words1[k].length()<words2[j].length()){
+                        continue;
+                    }
+                    for(int i=0;i<occurances2.length;i++){
+                        if(occurances2[i]>occurances1[i]){
+                            break;
+                        }
+                        count+=occurances2[i];
+                    }
+                    // System.out.println((count));
+                    if(count==words2[j].length()){
+                        universalWords1[k]++;
+                        // list.add(words1[k]);
+                    }
+                }                                                
+            }
+            // System.out.println(Arrays.toString(universalWords1));
+        for(int i=0;i<universalWords1.length;i++){
+            if(universalWords1[i]==words2.length)list.add(words1[i]);
+        }
+        
+        return list;
+    }
+}
