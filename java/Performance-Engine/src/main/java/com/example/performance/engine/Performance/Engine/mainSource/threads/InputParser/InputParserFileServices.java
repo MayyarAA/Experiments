@@ -6,16 +6,27 @@ import java.util.*;
 public class InputParserFileServices {
     File file;
     private HashMap<String, HashMap<String, String>> lineInFileMetricsMap = new HashMap<String, HashMap<String, String>>();
+    public static class TaskThread1 extends Thread{
+        private volatile String name;
+        public TaskThread1(String name){
+            super.setName(name);
+        }
+        @Override
+        public void run(){
 
+        }
+    }
     public InputParserFileServices(File file){
         this.file = file;
     }
     public HashMap<String, HashMap<String, String>> parseAndReturnFileData() {
-        String[] fakeData = new String[12];
+        String[] fakeData = new String[100];
         //parse file
         fillFakeData(fakeData);
         determineFileMetricsSync(fakeData);
+//        HashMap<String, HashMap<String, String>> res = determineFileMetricsASync(fakeData);
         return lineInFileMetricsMap;
+//        return res;
     }
     //return tot # of lines, tot # of chars, per line[tot # of chars, length of longests word]
     private void determineFileMetricsSync(String[] data) {
@@ -35,9 +46,14 @@ public class InputParserFileServices {
         lineInFileMetricsMap.put("OverAllFileData",overAllFileData);
     }
 
-    private void determineFileMetricsASync(String[] data){
-
-    }
+//    private HashMap<String, HashMap<String, String>> determineFileMetricsASync(String[] data){
+//        HashMap<String, HashMap<String, String>> res = new HashMap<>();
+//        TaskThread1 taskThread1 = new TaskThread1("taskThread1");
+//        TaskThread1 taskThread2 = new TaskThread1("taskThread2");
+//        taskThread1.start();
+//        taskThread2.start();
+//
+//    }
 
     void fillFakeData(String[] arr) {
         Random rand = new Random();

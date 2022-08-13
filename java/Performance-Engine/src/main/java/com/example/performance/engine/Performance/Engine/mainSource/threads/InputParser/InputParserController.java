@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.performance.engine.Performance.Engine.mainSource.threads.InputParser.InputParserFileServices.*;
 import java.io.File;
+import java.io.Serializable;
 import java.util.HashMap;
 
 @RestController
@@ -22,10 +23,34 @@ public class InputParserController {
             this.value = value;
         }
     }
+    class RunTimeResponse implements Serializable {
+        long runTime;
+        HashMap<String, HashMap<String,String>> fileMetrics;
+        RunTimeResponse(long time, HashMap<String, HashMap<String,String>> fileMetrics){
+            this.runTime = time;
+            this.fileMetrics = fileMetrics;
+        }
+        public void setFileMetrics(HashMap<String, HashMap<String, String>> fileMetrics) {
+            this.fileMetrics = fileMetrics;
+        }
+        public void setRunTime(long runTime) {
+            this.runTime = runTime;
+        }
+        public HashMap<String, HashMap<String, String>> getFileMetrics() {
+            return fileMetrics;
+        }
+        public long getRunTime() {
+            return runTime;
+        }
+    }
     @PostMapping(path = "submit/file")
-    public  ResponseEntity<HashMap<String, HashMap<String, String>>> submitFilePost(){
+    public  ResponseEntity<RunTimeResponse> submitFilePost(){
+        long startTime = System.nanoTime();
         HashMap<String, HashMap<String,String>> res = inputParserFileService.parseAndReturnFileData();
-        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(res);
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        RunTimeResponse runTimeResponse = new RunTimeResponse(duration, res);
+        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(runTimeResponse);
     }
     @GetMapping (path = "file")
     public  ResponseEntity<HashMap<String, String>> getFile(){

@@ -1,0 +1,46 @@
+Note taking
+================================================================================================
+User Needs:
+
+via terminal or POST API Req
+user enters
+<'mm/dd/yyyy', ['note1','note2']>
+
+
+user has unqiue id,
+each notebook user has has unique id
+================================================================================================
+Data Defined:
+User{
+	id;
+	notebooks: int[]
+}
+
+NoteBook{
+	id;
+	Pages: Page[]
+}
+
+Page{
+	id;
+	date
+	notes: note[]
+}
+
+Note{
+	id
+	date
+	value
+}
+
+
+================================================================================================
+
+Technical Implementation Details:
+
+will use .json as basic data store
+- need service that can write & read .json
+
+
+================================================================================================
+
