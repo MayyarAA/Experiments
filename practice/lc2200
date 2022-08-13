@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
+        /**
+            map for key => j
+            nums.length - j
+        */
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==key)set.add(i);
+        }
+        List<Integer> list = new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            for(int index: set){
+                if(Math.abs(i-index)<=k){
+                    list.add(i);
+                    break;
+                }
+            }
+        }
+        Collections.sort(list);
+        return list;
+    }
+}
