@@ -1,1 +1,9 @@
-Create .json service
+create reading .json service
+
+more DI
+
+do notebook controller
+
+do page controller
+
+map the .json keys in the file

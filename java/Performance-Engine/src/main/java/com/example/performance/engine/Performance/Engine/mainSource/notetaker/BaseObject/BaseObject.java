@@ -1,6 +1,8 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject;
 
 import com.google.gson.Gson;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -8,8 +10,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+    @Document
     @Component
 public abstract class BaseObject implements Serializable {
+    @Id
     private UUID id;
     private String date;
     private String name;

@@ -24,12 +24,11 @@ public class JSONDataStore {
         writeToJSONFile(note);
     }
 
-    public void writeToJSONFile(BaseObject baseObject, String fileName){
-        writeToFile(baseObject, fileName);
+    public void writeToJSONFile(BaseObject baseObject,String objType ,String fileName){
+        writeToFile(baseObject, objType,fileName);
     }
-    public void writeToFile(BaseObject baseObject, String fileName){
+    public void writeToFile(BaseObject baseObject, String objType, String fileName){
 //        String fullFilePathName = new File("").getAbsolutePath();
-
 //        String outputFileName= fullFilePathName.concat("/src/main/mainsource/notetaker/Output/").concat(fileName);
         String outputFileName = "/Users/mayyaral-atari/Desktop/work/experiments/java/Performance-Engine/src/main/java/com/example/performance/engine/Performance/Engine/mainSource/notetaker/output/".concat(fileName);
         try{
@@ -51,7 +50,7 @@ public class JSONDataStore {
         if(file.getAbsolutePath() == null || file.getAbsolutePath().isEmpty() ){
             System.out.println("Please give file name first");
         }
-        writeToFile(baseObject, this.file.getAbsolutePath());
+//        writeToFile(baseObject, this.file.getAbsolutePath());
 
     }
 
