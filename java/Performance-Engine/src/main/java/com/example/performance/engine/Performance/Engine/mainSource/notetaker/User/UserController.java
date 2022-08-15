@@ -1,16 +1,14 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.User;
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.DataStores.JSONDataStore;
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Note.Note;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.CustomLogger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -21,12 +19,24 @@ public class UserController {
     @Autowired
     private JSONDataStore jsonDataStore;
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @PostMapping(path ="/create")
-    public ResponseEntity<User> createUser(HttpEntity<String> httpEntity){
-        User user = new User(httpEntity.getBody());
-        userRepository.save(user);
+    public ResponseEntity<User> createUser(@NotNull HttpEntity<User> httpEntity){
+//        User user = httpEntity.getBody(httpEntity.getBody().getName());
+        User user = new User(httpEntity.getBody().getName());
+        userService.saveUserToDataStore(user);
         return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
+    }
+
+    @GetMapping(value="/get/{name}")
+    public ResponseEntity<User> getUser(@PathVariable("name") String name){
+        User user = userService.retrieveUser(name);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
+    }
+    @GetMapping(value="/test")
+    public ResponseEntity<User> getUser(){
+        User user = userService.retrieveUser("Mike");
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
     }
 }
 //        jsonDataStore.writeToJSONFile(user,"User","TestingFile2.json");

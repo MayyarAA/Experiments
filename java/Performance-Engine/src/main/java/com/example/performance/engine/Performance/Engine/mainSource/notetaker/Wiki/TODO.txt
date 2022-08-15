@@ -1,4 +1,8 @@
+fix issue w/ get user
+docker
+
 create reading .json service
+done
 
 more DI
 

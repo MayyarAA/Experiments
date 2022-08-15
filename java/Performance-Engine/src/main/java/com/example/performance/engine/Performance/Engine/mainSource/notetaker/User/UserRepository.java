@@ -3,9 +3,9 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.U
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-public interface UserRepository extends MongoRepository<User,String> {
+public interface UserRepository extends MongoRepository<UserEntity,String> {
     @Query("{name: '?0'}")
-    User findByName(String name);
+    UserEntity findItemByName(String name);
     public long count();
 }
 //    @Query(value ="{}")

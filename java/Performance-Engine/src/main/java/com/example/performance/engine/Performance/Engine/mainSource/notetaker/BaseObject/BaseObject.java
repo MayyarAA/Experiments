@@ -17,6 +17,11 @@ public abstract class BaseObject implements Serializable {
     private UUID id;
     private String date;
     private String name;
+    public BaseObject(String name, String date, UUID id){
+        setName(name);
+        setId(UUID.randomUUID());
+        setDate(date);
+    }
     public BaseObject(String name){
         setName(name);
         setId(UUID.randomUUID());
