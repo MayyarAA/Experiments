@@ -7,9 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomLogger {
-    Logger logger = LoggerFactory.getLogger("temp");
-    @Autowired
+    Logger logger = LoggerFactory.getLogger("NoteTakerLogger");
     private NoteTakerUtils noteTakerUtils;
+    @Autowired
+    public CustomLogger(NoteTakerUtils noteTakerUtils){
+        this.noteTakerUtils = noteTakerUtils;
+    }
     public void info(String message){
         logger.info("Time: " +" "
                 + noteTakerUtils.getCurrentTime()+ " " + message );

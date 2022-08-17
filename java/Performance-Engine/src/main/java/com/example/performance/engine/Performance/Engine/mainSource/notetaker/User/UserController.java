@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/user")
 @Component
 public class UserController {
-//    @Autowired
+
     private CustomLogger customLogger;
-//    @Autowired
     private JSONDataStore jsonDataStore;
 
     private UserService userService;
@@ -28,14 +27,14 @@ public class UserController {
     }
     @PostMapping(path ="/create")
     public ResponseEntity<User> createUser(@NotNull HttpEntity<User> httpEntity){
-//        User user = httpEntity.getBody(httpEntity.getBody().getName());
         User user = new User(httpEntity.getBody().getName());
         userService.saveUserToDataStore(user);
         customLogger.info("Created user " + user.getName() + " with id " + user.getId());
         return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
     }
 
-    @GetMapping(value="/get/{name}")
+//    @GetMapping(value="/get/{name}")
+    @RequestMapping(path = "/get/{name}", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable("name") String name){
         User user = userService.retrieveUser(name);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
