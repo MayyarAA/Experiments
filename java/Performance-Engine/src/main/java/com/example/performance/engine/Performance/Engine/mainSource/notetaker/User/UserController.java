@@ -14,21 +14,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/user")
 @Component
 public class UserController {
-    @Autowired
+//    @Autowired
     private CustomLogger customLogger;
-    @Autowired
+//    @Autowired
     private JSONDataStore jsonDataStore;
 
     private UserService userService;
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, CustomLogger customLogger, JSONDataStore jsonDataStore){
         this.userService = userService;
+        this.customLogger = customLogger;
+        this.jsonDataStore = jsonDataStore;
     }
     @PostMapping(path ="/create")
     public ResponseEntity<User> createUser(@NotNull HttpEntity<User> httpEntity){
 //        User user = httpEntity.getBody(httpEntity.getBody().getName());
         User user = new User(httpEntity.getBody().getName());
         userService.saveUserToDataStore(user);
+        customLogger.info("Created user " + user.getName() + " with id " + user.getId());
         return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
     }
 
