@@ -2,12 +2,14 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.U
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.BaseEntity;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
 @Document("user")
 public class UserEntity extends BaseEntity {
+    @Indexed(unique=true)
     private String email;
     public UserEntity(){
         super("name");

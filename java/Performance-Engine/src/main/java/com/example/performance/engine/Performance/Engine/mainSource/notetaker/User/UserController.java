@@ -18,8 +18,12 @@ public class UserController {
     private CustomLogger customLogger;
     @Autowired
     private JSONDataStore jsonDataStore;
-    @Autowired
+
     private UserService userService;
+    @Autowired
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
     @PostMapping(path ="/create")
     public ResponseEntity<User> createUser(@NotNull HttpEntity<User> httpEntity){
 //        User user = httpEntity.getBody(httpEntity.getBody().getName());

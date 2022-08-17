@@ -5,8 +5,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserService {
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
     public User saveUserToDataStore(String name){
         User user1 = new User(name);
         UserEntity userEntity = userMappedToUserEntity(user1);

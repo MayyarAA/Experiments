@@ -3,6 +3,7 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.B
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.NoteTakerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -10,7 +11,7 @@ import java.util.UUID;
 public class BaseEntity {
     @Autowired
     NoteTakerUtils noteTakerUtils;
-    @Id
+    @Indexed(unique=true)
     private UUID id;
     private String date;
     private String name;
