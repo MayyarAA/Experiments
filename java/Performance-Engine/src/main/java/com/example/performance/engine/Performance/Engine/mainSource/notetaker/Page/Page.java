@@ -27,6 +27,12 @@ public class Page extends BaseObject implements Serializable, ObjectHolder {
     public BaseObject getByName(String name){
         return noteNameMap.get(name);
     }
+
+    @Override
+    public void addBaseObjectToMap(String baseObjectName) {
+
+    }
+
     @Override
     public synchronized void removeByName(String name){
         Note note = noteNameMap.get(name);

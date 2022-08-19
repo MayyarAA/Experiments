@@ -14,7 +14,15 @@ import java.util.UUID;
 public class User  extends BaseObject implements Serializable, ObjectHolder {
 //    @Indexed(unique=true)
     String email;
+    String notebookName;
     public  User(){
+
+    }
+//    public void
+    public User(UUID userId, String notebookName){
+        super(userId);
+        this.notebookName= notebookName;
+        addBaseObjectToMap(notebookName);
 
     }
     public User(String username, String date, UUID id){
@@ -22,5 +30,16 @@ public class User  extends BaseObject implements Serializable, ObjectHolder {
     }
     public User(String name) {
         super(name);
+    }
+
+    public String getNotebookName() {
+        return notebookName;
+    }
+
+    @Override
+    public void addBaseObjectToMap(String baseObjectName) {
+        NoteBook noteBook = new NoteBook(baseObjectName);
+        noteBookNameMap.put(baseObjectName, noteBook);
+        noteBookIdMap.put(noteBook.getId(), noteBook);
     }
 }

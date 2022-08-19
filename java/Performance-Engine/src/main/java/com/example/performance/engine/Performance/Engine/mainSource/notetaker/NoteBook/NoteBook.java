@@ -7,12 +7,14 @@ import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Pa
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Stack;
 import java.util.UUID;
 
 public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     String description;
     private HashMap<String, Page> pageNameMap = new HashMap<>();
     private HashMap<UUID, Page> pageIdMap = new HashMap<>();
+    UUID ownerId;
     public NoteBook(){
 
     }
@@ -23,6 +25,19 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     public NoteBook(String name, String description){
         setDescription(description);
     }
+    public NoteBook(String name, UUID ownerId){
+        super(name);
+        this.ownerId= ownerId;
+    }
+
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public UUID getOwnerId() {
+        return ownerId;
+    }
+
     public void setDescription(String description){
         this.description = description;
     }
@@ -36,6 +51,11 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     @Override
     public BaseObject getByName(String name) {
         return pageNameMap.get(name);
+    }
+
+    @Override
+    public void addBaseObjectToMap(String baseObjectName) {
+
     }
 
     @Override
