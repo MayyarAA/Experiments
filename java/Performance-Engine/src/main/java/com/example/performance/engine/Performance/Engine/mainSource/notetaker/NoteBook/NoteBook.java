@@ -12,7 +12,7 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     String description;
     private HashMap<String, Page> pageNameMap = new HashMap<>();
     private HashMap<UUID, Page> pageIdMap = new HashMap<>();
-    UUID ownerId;
+    String ownerId;
     public NoteBook(){
 
     }
@@ -24,16 +24,16 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
         setDescription(description);
     }
 
-    public NoteBook(String name, UUID ownerId, UUID id){
+    public NoteBook(String name, String ownerId, UUID id){
         super(name, id);
         this.ownerId= ownerId;
     }
 
-    public void setOwnerId(UUID ownerId) {
+    public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
 
-    public UUID getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 

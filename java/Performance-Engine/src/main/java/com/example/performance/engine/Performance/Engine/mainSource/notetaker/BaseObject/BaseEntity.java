@@ -1,27 +1,31 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject;
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.NoteTakerUtils;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import java.util.UUID;
 
-
+@Setter
+@Getter
 public class BaseEntity {
 
     NoteTakerUtils noteTakerUtils;
     @Indexed(unique=true)
     private UUID customId;
-    public ObjectId id;
+//    @Id
+//    public ObjectId id;
+    @MongoId(FieldType.OBJECT_ID)
+    public String id;
     private String date;
     private String name;
 
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
 
-    public ObjectId getId() {
-        return id;
-    }
 
     public BaseEntity(String name, String date, UUID id){
         setName(name);
@@ -44,6 +48,7 @@ public class BaseEntity {
     public BaseEntity(String name){
         setName(name);
         setCustomId(UUID.randomUUID());
+        setDate("date");
         if(noteTakerUtils!=null)setDate(noteTakerUtils.getCurrentTime());
     }
     public void setCustomId(UUID customId) {

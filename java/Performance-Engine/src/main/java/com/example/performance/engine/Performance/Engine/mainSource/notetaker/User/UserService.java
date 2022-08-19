@@ -3,10 +3,12 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.U
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBook;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookEntity;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookRepository;
+import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookService;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.CustomLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -14,11 +16,13 @@ public class UserService {
     private UserRepository userRepository;
     private NoteBookRepository noteBookRepository;
     private CustomLogger customLogger;
+    private NoteBookService noteBookService;
     @Autowired
-    public UserService(UserRepository userRepository, CustomLogger customLogger,NoteBookRepository noteBookRepository ){
+    public UserService(UserRepository userRepository, CustomLogger customLogger,NoteBookRepository noteBookRepository, NoteBookService noteBookService ){
         this.customLogger = customLogger;
         this.userRepository = userRepository;
         this.noteBookRepository = noteBookRepository;
+        this.noteBookService = noteBookService;
     }
 
     public User saveUserToDataStore(String name){
@@ -27,6 +31,11 @@ public class UserService {
         userRepository.save(userEntity);
         return user1;
     }
+    public User retrieveUserById(String id){
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+        if(userEntity.isEmpty()) return null;
+        return userEntityMappedToUser(userEntity.get());
+    }
     public void saveUserToDataStore(User user){
         UserEntity userEntity = userMappedToUserEntity(user);
         userRepository.save(userEntity);
@@ -34,17 +43,18 @@ public class UserService {
         customLogger.info(" saveUserToDataStore " + userEntity.getName());
 
     }
-    public NoteBook addLinkBetweenNotebookAndUser(UUID userId, String notebookName){
-        NoteBookEntity noteBookEntity = new NoteBookEntity(notebookName, userId);
-        //add the notebook to db => set the <notebookId, userId>
+    public NoteBook addLinkBetweenNotebookAndUser(User user, String notebookName){
+        NoteBookEntity noteBookEntity = new NoteBookEntity(notebookName, user.getDbId());
         noteBookRepository.save(noteBookEntity);
-        NoteBook noteBook2 = new NoteBook(noteBookEntity.getName(),noteBookEntity.getOwnerId(), noteBookEntity.getCustomId());
+//        NoteBook noteBook2 = new NoteBook(noteBookEntity.getName(),noteBookEntity.getOwnerId(), noteBookEntity.getCustomId());
+        NoteBook noteBook2 = noteBookService.mapNoteBookEntityToModel(noteBookEntity);
         noteBook2.setDbId(noteBookEntity.getId().toString());
         return noteBook2;
     }
 
-    public void getAllNoteBooksForUser(User user){
+    public void getAllNoteBooksForUser(String userId){
         //go to db, query the notebook table on user.id, return all notebookEntities
+        noteBookRepository.findAllByOwnerId(userId);
     }
 
     public User retrieveUser(String username){

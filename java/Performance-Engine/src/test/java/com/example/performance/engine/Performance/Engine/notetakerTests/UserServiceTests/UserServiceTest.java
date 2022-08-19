@@ -1,6 +1,7 @@
 package com.example.performance.engine.Performance.Engine.notetakerTests.UserServiceTests;
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookRepository;
+import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookService;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.User.User;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.User.UserEntity;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.User.UserRepository;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.*;
 public class UserServiceTest {
     UserRepository userRepository;
     NoteBookRepository noteBookRepository;
+    NoteBookService noteBookService;
     UserService userService;
     String username= "Tome";
     User user = new User(username);
@@ -28,7 +30,8 @@ public class UserServiceTest {
     public  void setUp(){
         userRepository = mock(UserRepository.class);
         noteBookRepository = mock(NoteBookRepository.class);
-        userService = new UserService(userRepository, new CustomLogger(new NoteTakerUtils()), noteBookRepository);
+        noteBookService = mock(NoteBookService.class);
+        userService = new UserService(userRepository, new CustomLogger(new NoteTakerUtils()), noteBookRepository, noteBookService);
 //        userEntity = mock(UserEntity.class);
     }
     @Test

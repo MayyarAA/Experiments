@@ -31,9 +31,15 @@ public class NoteBookController {
     }
 
     @RequestMapping(path = "/name/{notebookname}", method = RequestMethod.GET)
-    public ResponseEntity<List<NoteBook>> getAllNoteBooksWithTheSameName(@PathVariable("notebookname") String notebookname){
-        List<NoteBook> noteBooks = noteBookService.getAllNoteBooksByNoteBookName(notebookname);
+    public ResponseEntity<NoteBook> getAllNoteBooksWithTheSameName(@PathVariable("notebookname") String notebookname){
+        NoteBook noteBooks = noteBookService.getAllNoteBooksByNoteBookName(notebookname);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(noteBooks);
+    }
+
+    @RequestMapping(path = "/test", method = RequestMethod.GET)
+    public ResponseEntity<Integer> testNoteBookController(){
+        int count = noteBookService.countOfAllNotBooks();
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(count);
     }
 
 

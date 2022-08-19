@@ -22,12 +22,12 @@ public class NoteTakerControllerV1 {
         return "Note Input is up & active";
     }
     @PostMapping(path ="health/object")
-    public ResponseEntity<Note> objectHealth(HttpEntity<Note> httpEntity){
-        Note note = new Note();
-        logger.info("(httpEntity.getBody().getValue() " + (httpEntity.getBody().getValue()));
-        note.setValue(httpEntity.getBody().getValue());
+    public ResponseEntity<String> objectHealth(HttpEntity<Note> httpEntity){
+//        Note note = new Note();
+//        logger.info("(httpEntity.getBody().getValue() " + (httpEntity.getBody().getValue()));
+//        note.setValue(httpEntity.getBody().getValue());
 
-        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(note);
+        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("note");
     }
     @PostMapping(path="note/simple")
     public ResponseEntity<String> simpleNotePost(HttpEntity<String> httpEntity){
