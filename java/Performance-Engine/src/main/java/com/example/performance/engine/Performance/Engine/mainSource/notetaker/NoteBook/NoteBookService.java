@@ -31,7 +31,6 @@ public class NoteBookService {
 
     public List<NoteBook> getAllNoteBooksOwnedByUserId(String userId){
         List<NoteBook> res = new ArrayList<>();
-//        List<NoteBookEntity> listOfNoteBooks = noteBookRepository.findAll(userId);
         List<NoteBookEntity> listOfNoteBooks = noteBookRepository.findAllByOwnerId(userId);
         if(listOfNoteBooks.isEmpty()) return res;
         for(NoteBookEntity noteBookEntity: listOfNoteBooks){
