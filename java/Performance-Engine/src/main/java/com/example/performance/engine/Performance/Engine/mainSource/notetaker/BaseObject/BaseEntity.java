@@ -1,32 +1,53 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject;
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.NoteTakerUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.stereotype.Component;
-
+import org.bson.types.ObjectId;
 import java.util.UUID;
 
+
 public class BaseEntity {
-    @Autowired
+
     NoteTakerUtils noteTakerUtils;
     @Indexed(unique=true)
-    private UUID id;
+    private UUID customId;
+    public ObjectId id;
     private String date;
     private String name;
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
     public BaseEntity(String name, String date, UUID id){
         setName(name);
-        setId(id);
+        setCustomId(id);
         setDate(date);
     }
+//    @Autowired
+    public BaseEntity(NoteTakerUtils noteTakerUtils){
+        this.noteTakerUtils = noteTakerUtils;
+    }
+
+    public void setNoteTakerUtils(NoteTakerUtils noteTakerUtils) {
+        this.noteTakerUtils = noteTakerUtils;
+    }
+
+    public BaseEntity(){
+
+    }
+//    @Autowired
     public BaseEntity(String name){
         setName(name);
-        setId(UUID.randomUUID());
-        if(this.date!=null) setDate(noteTakerUtils.getCurrentTime());
+        setCustomId(UUID.randomUUID());
+        if(noteTakerUtils!=null)setDate(noteTakerUtils.getCurrentTime());
     }
-    public void setId(UUID id) {
-        this.id = id;
+    public void setCustomId(UUID customId) {
+        this.customId = customId;
     }
 
     public void setDate(String date) {
@@ -37,8 +58,8 @@ public class BaseEntity {
         this.name = name;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getCustomId() {
+        return customId;
     }
 
     public String getDate() {

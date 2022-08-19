@@ -2,7 +2,6 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.U
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.DataStores.JSONDataStore;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBook;
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookEntity;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.CustomLogger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class UserController {
     public ResponseEntity<User> createUser(@NotNull HttpEntity<User> httpEntity){
         User user = new User(httpEntity.getBody().getName());
         userService.saveUserToDataStore(user);
-        customLogger.info("Created user " + user.getName() + " with id " + user.getId());
+        customLogger.info("Created user " + user.getName() + " with id " + user.getCustomId());
         return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
     }
 
@@ -49,7 +48,7 @@ public class UserController {
     @PostMapping(path ="/notebook/create")
     public ResponseEntity<NoteBook> createNoteBookForUser(@NotNull HttpEntity<User> httpEntity){
         User user = httpEntity.getBody();
-        NoteBook noteBook = userService.addLinkBetweenNotebookAndUser(user.getId(), user.getNotebookName());
+        NoteBook noteBook = userService.addLinkBetweenNotebookAndUser(user.getCustomId(), user.getNotebookName());
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(noteBook);
     }
     @PostMapping(path ="/link/notebook")
@@ -57,4 +56,4 @@ public class UserController {
         return null;
     }
 }
-//        jsonDataStore.writeToJSONFile(user,"User","TestingFile2.json");
+

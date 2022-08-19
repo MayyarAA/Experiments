@@ -1,29 +1,41 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook;
 
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.User.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/notebook")
 @Component
 public class NoteBookController {
+    NoteBookService noteBookService;
 
-    @GetMapping(value="/test")
-    public ResponseEntity<User> getUser(){
-//        User user = userService.retrieveUser("Mike");
-
-        return null;
-//        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(user);
+    @Autowired
+    public NoteBookController(NoteBookService noteBookService){
+        this.noteBookService = noteBookService;
     }
+    @RequestMapping(path = "/get/{notebookid}", method = RequestMethod.GET)
+    public ResponseEntity<NoteBook> getNotebookById(@PathVariable("notebookid") String notebookid){
+        NoteBook noteBook = noteBookService.getNoteBookById(notebookid);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(noteBook);
+    }
+
+    @RequestMapping(path = "/ownerId/{ownerId}", method = RequestMethod.GET)
+    public ResponseEntity<List<NoteBook>> getAllNoteBooksForUser(@PathVariable("ownerId") String ownerId){
+        List<NoteBook> noteBooks = noteBookService.getAllNoteBooksOwnedByUserId(ownerId);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(noteBooks);
+    }
+
+    @RequestMapping(path = "/name/{notebookname}", method = RequestMethod.GET)
+    public ResponseEntity<List<NoteBook>> getAllNoteBooksWithTheSameName(@PathVariable("notebookname") String notebookname){
+        List<NoteBook> noteBooks = noteBookService.getAllNoteBooksByNoteBookName(notebookname);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(noteBooks);
+    }
+
 
 
 }

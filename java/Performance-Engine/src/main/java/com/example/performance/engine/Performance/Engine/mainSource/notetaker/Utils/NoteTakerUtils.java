@@ -12,6 +12,9 @@ import java.time.format.DateTimeFormatter;
 @Scope(value = "singleton")
 public class NoteTakerUtils {
     Gson gson = new Gson();
+    public  NoteTakerUtils(){
+
+    }
     public String convertToJSON(BaseObject obj){
         return gson.toJson(obj);
     }

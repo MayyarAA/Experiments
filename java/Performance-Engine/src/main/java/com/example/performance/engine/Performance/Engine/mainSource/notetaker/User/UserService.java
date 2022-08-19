@@ -20,11 +20,7 @@ public class UserService {
         this.userRepository = userRepository;
         this.noteBookRepository = noteBookRepository;
     }
-//    @Autowired
-//    public UserService(UserRepository userRepository, CustomLogger customLogger){
-//        this.customLogger = customLogger;
-//        this.userRepository = userRepository;
-//    }
+
     public User saveUserToDataStore(String name){
         User user1 = new User(name);
         UserEntity userEntity = userMappedToUserEntity(user1);
@@ -34,6 +30,7 @@ public class UserService {
     public void saveUserToDataStore(User user){
         UserEntity userEntity = userMappedToUserEntity(user);
         userRepository.save(userEntity);
+        user.setDbId(userEntity.getId().toString());
         customLogger.info(" saveUserToDataStore " + userEntity.getName());
 
     }
@@ -41,7 +38,8 @@ public class UserService {
         NoteBookEntity noteBookEntity = new NoteBookEntity(notebookName, userId);
         //add the notebook to db => set the <notebookId, userId>
         noteBookRepository.save(noteBookEntity);
-        NoteBook noteBook2 = new NoteBook(noteBookEntity.getName(),noteBookEntity.getOwnerId());
+        NoteBook noteBook2 = new NoteBook(noteBookEntity.getName(),noteBookEntity.getOwnerId(), noteBookEntity.getCustomId());
+        noteBook2.setDbId(noteBookEntity.getId().toString());
         return noteBook2;
     }
 
@@ -53,18 +51,19 @@ public class UserService {
         if(username == null) return null;
         customLogger.info("looking for user w/ " + username) ;
         UserEntity userEntity = userRepository.findItemByName(username);
-        customLogger.info("retrieveUser " + userEntity.getName() + " with id " + userEntity.getId());
+        customLogger.info("retrieveUser " + userEntity.getName() + " with id " + userEntity.getCustomId());
         return userEntityMappedToUser(userEntity);
     }
     private  UserEntity userMappedToUserEntity(User user){
-        UserEntity userEntity = new UserEntity(user.getName(), user.getDate(), user.getId());
+        UserEntity userEntity = new UserEntity(user.getName(), user.getDate(), user.getCustomId());
         return userEntity;
     }
     private  User userEntityMappedToUser(UserEntity userEntity){
         if(userEntity==null){
 
         }
-        User user = new User(userEntity.getName(), userEntity.getDate(), userEntity.getId());
+        User user = new User(userEntity.getName(), userEntity.getDate(), userEntity.getCustomId());
+        user.setDbId(userEntity.getId().toString());
         return user;
     }
 

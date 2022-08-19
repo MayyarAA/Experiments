@@ -1,8 +1,5 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject;
 
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Note.Note;
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBook;
-
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -23,7 +20,7 @@ public interface ObjectHolder {
         removeFull(getByName(name));
     }
     public  default void removeFull(BaseObject baseObject){
-        noteBookIdMap.remove(baseObject.getId());
+        noteBookIdMap.remove(baseObject.getCustomId());
         noteBookNameMap.remove(baseObject.getName());
     }
 }

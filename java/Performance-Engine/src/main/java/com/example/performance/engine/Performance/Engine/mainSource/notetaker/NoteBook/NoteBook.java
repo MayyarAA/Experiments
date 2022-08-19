@@ -2,12 +2,10 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.N
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.BaseObject;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.ObjectHolder;
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Note.Note;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Page.Page;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Stack;
 import java.util.UUID;
 
 public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
@@ -25,8 +23,9 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     public NoteBook(String name, String description){
         setDescription(description);
     }
-    public NoteBook(String name, UUID ownerId){
-        super(name);
+
+    public NoteBook(String name, UUID ownerId, UUID id){
+        super(name, id);
         this.ownerId= ownerId;
     }
 
@@ -70,7 +69,7 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
 
     @Override
     public void removeFull(BaseObject baseObject) {
-        pageIdMap.remove(baseObject.getId());
+        pageIdMap.remove(baseObject.getCustomId());
         pageNameMap.remove(baseObject.getName());
     }
 }

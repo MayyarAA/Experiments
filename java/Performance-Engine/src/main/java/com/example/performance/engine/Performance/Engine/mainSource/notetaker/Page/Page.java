@@ -13,7 +13,7 @@ public class Page extends BaseObject implements Serializable, ObjectHolder {
     private HashMap<UUID, Note> noteIdMap = new HashMap<>();
     public void addNote(Note note){
         noteNameMap.put(note.getName(), note);
-        noteIdMap.put(note.getId(), note);
+        noteIdMap.put(note.getCustomId(), note);
     }
     public int getNumberOfNotes(){
         return noteIdMap.size();
@@ -46,7 +46,7 @@ public class Page extends BaseObject implements Serializable, ObjectHolder {
 
     @Override
      public void removeFull(BaseObject baseObject){
-        noteIdMap.remove(baseObject.getId());
+        noteIdMap.remove(baseObject.getCustomId());
         noteNameMap.remove(baseObject.getName());
 
     }

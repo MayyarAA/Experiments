@@ -2,12 +2,10 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.U
 
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.BaseObject;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.ObjectHolder;
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Note.Note;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBook;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.UUID;
 
 @Document("user")
@@ -40,6 +38,6 @@ public class User  extends BaseObject implements Serializable, ObjectHolder {
     public void addBaseObjectToMap(String baseObjectName) {
         NoteBook noteBook = new NoteBook(baseObjectName);
         noteBookNameMap.put(baseObjectName, noteBook);
-        noteBookIdMap.put(noteBook.getId(), noteBook);
+        noteBookIdMap.put(noteBook.getCustomId(), noteBook);
     }
 }

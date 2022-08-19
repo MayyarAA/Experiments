@@ -19,4 +19,8 @@ public class NoteBookEntity extends BaseEntity implements Serializable {
     public UUID getOwnerId() {
         return ownerId;
     }
+
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }
 }
