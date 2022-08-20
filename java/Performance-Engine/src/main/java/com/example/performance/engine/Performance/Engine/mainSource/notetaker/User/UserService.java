@@ -43,11 +43,9 @@ public class UserService {
 
     }
     public NoteBook addLinkBetweenNotebookAndUser(User user, String notebookName){
-        NoteBookEntity noteBookEntity = new NoteBookEntity(notebookName, user.getDbId());
-        noteBookRepository.save(noteBookEntity);
-        NoteBook noteBook2 = noteBookService.mapNoteBookEntityToModel(noteBookEntity);
-        noteBook2.setDbId(noteBookEntity.getId());
-        return noteBook2;
+        NoteBook noteBook = noteBookService.createNoteBook(user, notebookName);
+        //TO:DO append user obj w/ new notebookId
+        return noteBook;
     }
 
     public void getAllNoteBooksForUser(String userId){

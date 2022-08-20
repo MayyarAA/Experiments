@@ -67,4 +67,9 @@ public abstract class BaseObject implements Serializable {
         setDate(dtf.format(now));
     }
 
+    public boolean isEmpty(){
+        if(customId == null ) return true;
+        return false;
+    }
+
 }

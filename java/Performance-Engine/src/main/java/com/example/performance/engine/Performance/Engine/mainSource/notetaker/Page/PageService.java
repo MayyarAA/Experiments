@@ -24,7 +24,7 @@ public class PageService {
         page.setOwnerId(pageEntity.getOwnerId());
     }
     public Page getPageById(String id){
-        PageEntity pageEntity = pageRepository.findAllByPageId(id);
+        PageEntity pageEntity = pageRepository.findByPageId(id);
         Page newPage  = entityToModelMapping(pageEntity);
         return newPage;
     }

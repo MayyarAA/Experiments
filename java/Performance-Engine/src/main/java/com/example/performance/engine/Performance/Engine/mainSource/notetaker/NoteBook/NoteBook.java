@@ -3,18 +3,36 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.N
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.BaseObject;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.ObjectHolder;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Page.Page;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
 
+@Setter @Getter
 public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     String description;
+    HashSet<String> admins;
+    HashSet<String> viewers;
     private HashMap<String, Page> pageNameMap = new HashMap<>();
     private HashMap<UUID, Page> pageIdMap = new HashMap<>();
     String ownerId;
     public NoteBook(){
 
+    }
+    public void addAdmin(String potentialAdminId){
+        removeViewer(potentialAdminId);
+        admins.add(potentialAdminId);
+    }
+    public void addViewer(String potentialViewerId){
+        viewers.add(potentialViewerId);
+    }
+    public void removeViewer(String viewerId){
+        if(viewers == null || viewers.isEmpty())return;
+        viewers.remove(viewerId);
     }
 
     public NoteBook(String name){
@@ -27,6 +45,17 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     public NoteBook(String name, String ownerId, UUID id){
         super(name, id);
         this.ownerId= ownerId;
+    }
+    public NoteBook(String name, String ownerId, boolean setAdmin){
+        super(name);
+        setOwnerId(ownerId);
+        admins = new HashSet<>();
+        admins.add(ownerId);
+    }
+    public boolean isAdmin(String potentialAdminId){
+        if(admins == null) return false;
+        if(admins.contains(potentialAdminId))return true;
+        return false;
     }
 
     public void setOwnerId(String ownerId) {

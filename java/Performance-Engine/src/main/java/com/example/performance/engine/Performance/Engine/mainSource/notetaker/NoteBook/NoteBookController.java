@@ -1,5 +1,7 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook;
 
+import com.example.performance.engine.Performance.Engine.mainSource.notetaker.RequestObjects.AddAdminRequest;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,17 @@ public class NoteBookController {
     public ResponseEntity<Integer> testNoteBookController(){
         int count = noteBookService.countOfAllNotBooks();
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(count);
+    }
+
+    @PostMapping(path ="/admin/add")
+    public ResponseEntity<Object> addNewAdminToExistingNoteBook(@NotNull @RequestBody AddAdminRequest addAdminRequest) throws Exception {
+        try{
+
+            NoteBook noteBook = noteBookService.addAdmin(addAdminRequest.getPotentialNewAdminId(), addAdminRequest.getRequestCreaterUserId(),addAdminRequest.getNoteBookId());
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(noteBook);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(e.getMessage());
+        }
     }
 
 

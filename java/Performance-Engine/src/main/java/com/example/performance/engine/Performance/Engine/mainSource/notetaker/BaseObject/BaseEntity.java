@@ -51,6 +51,11 @@ public class BaseEntity {
         setDate("date");
         if(noteTakerUtils!=null)setDate(noteTakerUtils.getCurrentTime());
     }
+
+    public BaseEntity(String name, String id){
+        setName(name);
+        setId(id);
+    }
     public void setCustomId(UUID customId) {
         this.customId = customId;
     }

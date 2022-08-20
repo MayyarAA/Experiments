@@ -1,6 +1,5 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.Page;
 
-import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -13,7 +12,7 @@ public interface PageRepository extends MongoRepository<PageEntity,String> {
     @Query(value="{ownerId: ?0}")
     List<PageEntity> findAllByOwnerId(String ownerId);
     @Query(value="{id: ?0}")
-    PageEntity findAllByPageId(String pageId);
+    PageEntity findByPageId(String pageId);
 
     @Query(value="{noteBookId: ?0}")
     List<PageEntity> findAllByNoteBookId(String noteBookId);
