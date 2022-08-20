@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 public class UserService {
@@ -18,7 +17,7 @@ public class UserService {
     private CustomLogger customLogger;
     private NoteBookService noteBookService;
     @Autowired
-    public UserService(UserRepository userRepository, CustomLogger customLogger,NoteBookRepository noteBookRepository, NoteBookService noteBookService ){
+    public UserService(UserRepository userRepository, CustomLogger customLogger, NoteBookRepository noteBookRepository, NoteBookService noteBookService ){
         this.customLogger = customLogger;
         this.userRepository = userRepository;
         this.noteBookRepository = noteBookRepository;
@@ -63,6 +62,7 @@ public class UserService {
         customLogger.info("retrieveUser " + userEntity.getName() + " with id " + userEntity.getCustomId());
         return userEntityMappedToUser(userEntity);
     }
+
     private  UserEntity userMappedToUserEntity(User user){
         UserEntity userEntity = new UserEntity(user.getName(), user.getDate(), user.getCustomId());
         return userEntity;

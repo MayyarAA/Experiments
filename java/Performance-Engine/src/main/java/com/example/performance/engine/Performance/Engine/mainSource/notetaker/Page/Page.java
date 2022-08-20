@@ -3,14 +3,23 @@ package com.example.performance.engine.Performance.Engine.mainSource.notetaker.P
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.BaseObject;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.BaseObject.ObjectHolder;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Note.Note;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.*;
 
+@Setter@Getter
 public class Page extends BaseObject implements Serializable, ObjectHolder {
-
+    private String ownerId;
+    private String noteBookId;
     private HashMap<String, Note> noteNameMap = new HashMap<>();
     private HashMap<UUID, Note> noteIdMap = new HashMap<>();
+    public Page(String name, String ownerId, String noteBookId){
+        super(name);
+        setOwnerId(ownerId);
+        setDbId(noteBookId);
+    }
     public void addNote(Note note){
         noteNameMap.put(note.getName(), note);
         noteIdMap.put(note.getCustomId(), note);

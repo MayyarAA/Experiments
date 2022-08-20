@@ -7,8 +7,6 @@ import java.util.List;
 
 
 public interface NoteBookRepository extends MongoRepository<NoteBookEntity,String> {
-//    @Query("{name: '?0'}")
-//    NoteBookEntity findItemByOwnerId(String name);
     @Query("{name: ?0}")
     NoteBookEntity findItemByName(String name);
 

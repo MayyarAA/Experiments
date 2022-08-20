@@ -24,7 +24,6 @@ public class NoteBookService {
     }
     public NoteBook getNoteBookById(String notebookid){
         Optional<NoteBookEntity> noteBookEntity = noteBookRepository.findById(notebookid);
-//        Optional<NoteBookEntity> noteBookEntity = noteBookRepository.findOne(new NoteBookEntity(notebookid));
         if(!noteBookEntity.isPresent()) return null;
         return mapNoteBookEntityToModel(noteBookEntity.get());
     }

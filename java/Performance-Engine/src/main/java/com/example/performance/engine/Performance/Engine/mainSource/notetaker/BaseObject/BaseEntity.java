@@ -74,4 +74,13 @@ public class BaseEntity {
     public String getName() {
         return name;
     }
+    public boolean isNull(){
+        if(this.customId==null && this.id ==null){
+            return true;
+        }
+        if(this.id == null){
+            return true;
+        }
+        return false;
+    }
 }
