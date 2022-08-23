@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "ramda": "^0.28.0",
     "typescript": "^4.7.4"
   }
 }
