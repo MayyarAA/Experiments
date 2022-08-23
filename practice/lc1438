@@ -1,0 +1,27 @@
+class Solution {
+    public int longestSubarray(int[] nums, int limit) {
+        /**
+        iterate, when max diff is higher move left
+        pQueue 
+        */
+        int res=0;
+        int left=0;
+        int right=0;
+        PriorityQueue<Integer> queueMax = new PriorityQueue<>();
+        PriorityQueue<Integer> queueMin = new PriorityQueue<>(Collections.reverseOrder());
+        while(right<nums.length && left<nums.length){
+            queueMax.add(nums[right]);//1
+            queueMin.add(nums[right]);//1
+            if(!queueMax.isEmpty() && Math.abs(queueMax.peek() - queueMin.peek())>limit){
+                //move left;
+                queueMax.remove(nums[left]);
+                queueMin.remove(nums[left]);
+                left++;//1
+            }else{
+                res = Math.max(res, (right-left +1 ));//1
+            }
+            right++;   //1
+        }
+        return res;
+    }
+}
