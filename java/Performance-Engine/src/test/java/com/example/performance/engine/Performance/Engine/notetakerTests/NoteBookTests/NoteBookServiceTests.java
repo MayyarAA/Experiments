@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
@@ -51,5 +53,17 @@ public class NoteBookServiceTests {
         //asr
         Assertions.assertInstanceOf(NoteBook.class, noteBook);
         Assertions.assertTrue(noteBook.getName().compareTo(mockedNoteBookName) == 0);
+    }
+
+    @Test
+    public void getAllNoteBooksOwnedByUserIdTests() {
+        //arr
+        List<NoteBookEntity> mockedListOfNoteBooks = new ArrayList<>();
+        mockedListOfNoteBooks.add(new NoteBookEntity(mockedNoteBookName, mockedOwnerId));
+        when(noteBookRepository.findAllByOwnerId(mockedOwnerId)).thenReturn(mockedListOfNoteBooks);
+        //act
+        List<NoteBook> noteBookList = noteBookService.getAllNoteBooksOwnedByUserId(mockedOwnerId);
+        //asr
+        Assertions.assertEquals(noteBookList.size(), mockedListOfNoteBooks.size());
     }
 }
