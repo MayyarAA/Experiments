@@ -1,0 +1,59 @@
+class Solution {
+    public boolean validWordAbbreviation(String word, String abbr) {
+        String[] preProcessedArray = splitStringAndNumbers(abbr);
+        // System.out.println(Arrays.toString(preProcessedArray));
+        int abbrLength=0;
+        //non-adj,no leading zero,non empty
+        for(int i=0;i<preProcessedArray.length;i++){
+            String curr = preProcessedArray[i];  
+            if(!isNumeric(curr)){
+                if(abbrLength +curr.length() > word.length()
+                   ||curr.compareTo(
+                       word.substring(abbrLength, curr.length()+abbrLength))!=0){
+                    return false;
+                }
+                abbrLength+=curr.length();continue;
+            }            
+            //if empty or leading zero
+            if(curr.length()==0 || Character.compare(curr.charAt(0),'0')==0){
+                return false;
+            }
+            if(i<preProcessedArray.length-1 && isNumeric(preProcessedArray[i+1])){
+                return false;
+            }            
+            abbrLength+=Integer.parseInt(curr);
+        }
+        // System.out.println(abbrLength);
+        //check if the num of substring is valid
+        return abbrLength==word.length()?true:false;
+    }
+    public static boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
+    String[] splitStringAndNumbers(String abbr){
+        List<String> list = new ArrayList<>();        
+        int left=0;
+        int right=0;
+        while(right<abbr.length()){
+            if(Character.isDigit(abbr.charAt(right))){
+                list.add(abbr.substring(left,right));
+                left=right;
+                while(right<abbr.length() && Character.isDigit(abbr.charAt(right))){
+                    right++;
+                }
+                list.add(abbr.substring(left,right));
+                left=right;
+            }else{
+                right++;   
+            }
+            if(right==abbr.length()){
+                list.add(abbr.substring(left,right));
+            }
+        }
+        if(list.get(0).length()==0)list.remove(0);
+        String[] res = new String[list.size()];
+        // System.out.println(list.toString());
+        for(int i=0;i<res.length;i++){res[i]=list.get(i);} 
+        return res;
+    }
+}
