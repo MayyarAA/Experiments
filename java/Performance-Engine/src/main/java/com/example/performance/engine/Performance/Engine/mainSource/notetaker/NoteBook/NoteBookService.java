@@ -1,5 +1,7 @@
 package com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook;
 
+import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Page.Page;
+import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Page.PageService;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Secuirty.NoteTakerAuthorizationService;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.User.User;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.CustomLogger;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +20,14 @@ public class NoteBookService {
     private NoteTakerAuthorizationService noteTakerAuthorizationService;
     private NoteBookRepository noteBookRepository;
     private CustomLogger customLogger;
+    private PageService pageService;
 
     @Autowired
-    public NoteBookService(CustomLogger customLogger, NoteBookRepository noteBookRepository, NoteTakerAuthorizationService noteTakerAuthorizationService) {
+    public NoteBookService(CustomLogger customLogger, NoteBookRepository noteBookRepository, NoteTakerAuthorizationService noteTakerAuthorizationService, PageService pageService) {
         this.customLogger = customLogger;
         this.noteBookRepository = noteBookRepository;
         this.noteTakerAuthorizationService = noteTakerAuthorizationService;
+        this.pageService = pageService;
 
     }
 
@@ -60,6 +65,7 @@ public class NoteBookService {
         res.setName(noteBookEntity.getName());
         res.setAdmins(noteBookEntity.getAdmins());
         res.setViewers(noteBookEntity.getViewers());
+        res.setNotes(noteBookEntity.getPages());
         return res;
     }
 
@@ -90,6 +96,28 @@ public class NoteBookService {
         NoteBookEntity noteBookEntity = modelToEntity(noteBook);
         noteBookRepository.save(noteBookEntity);
         noteBook.setDbId(noteBookEntity.getId());
+        return noteBook;
+    }
+
+    public NoteBook linkPageToNoteBook(String noteBookId, Page page) throws Exception {
+        NoteBookEntity noteBookEntity = noteBookRepository.findByNotebookId(noteBookId);
+        if (noteBookEntity.isNull()) {
+            throw new Exception("Note book does not exists");
+        }
+        page.setOwnerId(noteBookEntity.getOwnerId());
+        page.setNoteBookId(noteBookEntity.getId());
+        String pageId = pageService.createAndSavePage(page, noteBookEntity.getId());
+        if (noteBookEntity.getPages() == null) {
+            HashSet<String> pages = new HashSet<>();
+            pages.add(pageId);
+            noteBookEntity.setPages(pages);
+        } else {
+            noteBookEntity.getPages().add(page.getDbId());
+        }
+        noteBookRepository.save(noteBookEntity);
+
+
+        NoteBook noteBook = entityToModel(noteBookEntity);
         return noteBook;
     }
 }

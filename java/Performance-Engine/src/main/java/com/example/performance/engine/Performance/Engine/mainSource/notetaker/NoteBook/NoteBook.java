@@ -9,52 +9,60 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.UUID;
 
-@Setter @Getter
+@Setter
+@Getter
 public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
     String description;
     HashSet<String> admins;
     HashSet<String> viewers;
+    HashSet<String> notes;
     private HashMap<String, Page> pageNameMap = new HashMap<>();
     private HashMap<UUID, Page> pageIdMap = new HashMap<>();
     String ownerId;
-    public NoteBook(){
+
+    public NoteBook() {
 
     }
-    public void addAdmin(String potentialAdminId){
+
+    public void addAdmin(String potentialAdminId) {
         removeViewer(potentialAdminId);
         admins.add(potentialAdminId);
     }
-    public void addViewer(String potentialViewerId){
+
+    public void addViewer(String potentialViewerId) {
         viewers.add(potentialViewerId);
     }
-    public void removeViewer(String viewerId){
-        if(viewers == null || viewers.isEmpty())return;
+
+    public void removeViewer(String viewerId) {
+        if (viewers == null || viewers.isEmpty()) return;
         viewers.remove(viewerId);
     }
 
-    public NoteBook(String name){
+    public NoteBook(String name) {
 
     }
-    public NoteBook(String name, String description){
+
+    public NoteBook(String name, String description) {
         setDescription(description);
     }
 
-    public NoteBook(String name, String ownerId, UUID id){
+    public NoteBook(String name, String ownerId, UUID id) {
         super(name, id);
-        this.ownerId= ownerId;
+        this.ownerId = ownerId;
     }
-    public NoteBook(String name, String ownerId, boolean setAdmin){
+
+    public NoteBook(String name, String ownerId, boolean setAdmin) {
         super(name);
         setOwnerId(ownerId);
         admins = new HashSet<>();
         admins.add(ownerId);
     }
-    public boolean isAdmin(String potentialAdminId){
-        if(admins == null) return false;
-        if(admins.contains(potentialAdminId))return true;
+
+    public boolean isAdmin(String potentialAdminId) {
+        if (admins == null) return false;
+        if (admins.contains(potentialAdminId)) return true;
         return false;
     }
 
@@ -66,7 +74,7 @@ public class NoteBook extends BaseObject implements Serializable, ObjectHolder {
         return ownerId;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 

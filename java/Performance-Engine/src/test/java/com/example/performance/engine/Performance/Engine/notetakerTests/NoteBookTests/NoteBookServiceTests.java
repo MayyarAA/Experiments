@@ -4,6 +4,7 @@ import com.example.performance.engine.Performance.Engine.mainSource.notetaker.No
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookEntity;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookRepository;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.NoteBook.NoteBookService;
+import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Page.PageService;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Secuirty.NoteTakerAuthorizationService;
 import com.example.performance.engine.Performance.Engine.mainSource.notetaker.Utils.CustomLogger;
 import org.junit.jupiter.api.Assertions;
@@ -22,6 +23,7 @@ import static org.mockito.Mockito.when;
 public class NoteBookServiceTests {
     NoteTakerAuthorizationService noteTakerAuthorizationService;
     NoteBookRepository noteBookRepository;
+    PageService pageService;
     CustomLogger customLogger;
     NoteBookService noteBookService;
     final String mockedNoteBookId = "mockedNoteBookId";
@@ -35,7 +37,8 @@ public class NoteBookServiceTests {
         noteTakerAuthorizationService = mock(NoteTakerAuthorizationService.class);
         noteBookRepository = mock(NoteBookRepository.class);
         customLogger = mock(CustomLogger.class);
-        noteBookService = new NoteBookService(customLogger, noteBookRepository, noteTakerAuthorizationService);
+        pageService = mock(PageService.class);
+        noteBookService = new NoteBookService(customLogger, noteBookRepository, noteTakerAuthorizationService, pageService);
     }
 
     private boolean isEqual(NoteBook n1, NoteBook n2) {
