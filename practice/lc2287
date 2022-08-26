@@ -1,0 +1,38 @@
+class Solution {
+    public int rearrangeCharacters(String s, String target) {
+        /**
+        it s, when you find curr char your looking for add it
+        once target.length reached start new count
+        **/
+        int res=0;
+            // Integer.MAX_VALUE;
+        int indexOfTarget = 0;
+        char[] arr = s.toCharArray();
+        HashMap<Character,Integer> map = new HashMap<>();
+        HashSet<Character> set = new HashSet<>();
+        for(char ch: target.toCharArray()){
+            set.add(ch);
+        }
+        for(int i=0;i<arr.length;i++){
+            if(set.contains(arr[i])){
+                map.put(arr[i],map.getOrDefault(arr[i],0)+1);   
+            }            
+        }
+        while(true){
+            char ch = target.charAt(indexOfTarget);
+            if(map.containsKey(ch) && map.get(ch)>0){//<c,2><o,4><d,2><e,4>
+                indexOfTarget++;//1,2,3,4,0
+                map.put(ch,map.get(ch)-1);//<c,1>
+            }else{
+                break;
+            }
+            if(indexOfTarget>=target.length()){
+                indexOfTarget=0;
+                res++;
+            }
+            // if(map.get(ch)<=0) break;
+        }
+        // return res==Integer.MAX_VALUE?0:res;
+        return res;
+    }
+}
