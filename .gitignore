@@ -2,3 +2,11 @@ node_modules
 node_modules/
 **/node_modules
 /node_modules
+
+*.yml
+.yml
+
+yml
+
+# ignore all logs
+application.yml

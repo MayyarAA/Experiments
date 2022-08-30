@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class AwsSQSConfig {
 
+    //step 1: import the variables from application.yml file
     @Value("${cloud.aws.region.static}")
     private String region;
 
@@ -22,7 +23,7 @@ public class AwsSQSConfig {
 
     @Value("${cloud.aws.credentials.secret-key}")
     private String awsSecretKey;
-
+    //define actual aws sqs obj
     @Bean
     public QueueMessagingTemplate queueMessagingTemplate() {
         return new QueueMessagingTemplate(amazonSQSAsync());

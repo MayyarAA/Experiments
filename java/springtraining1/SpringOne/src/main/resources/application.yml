@@ -1,8 +1,8 @@
-management:
-    endpoints:
-        web:
-            exposure:
-                include: "*"
+#management:
+#    endpoints:
+#        web:
+#            exposure:
+#                include: "*"
 #    security:
 #        enabled: false
 #server:
@@ -12,14 +12,14 @@ management:
 #        key-store-type: JKS
 #        key-alias: linkedin
 #        key-password: password
-
----
-spring:
-    profiles: dev
-server:
-    port: 8000
----
-spring:
-    profiles: test
-server:
-    port: 9000
+#
+#---
+#spring:
+#    profiles: dev
+#server:
+#    port: 8000
+#---
+#spring:
+#    profiles: test
+#server:
+#    port: 9000

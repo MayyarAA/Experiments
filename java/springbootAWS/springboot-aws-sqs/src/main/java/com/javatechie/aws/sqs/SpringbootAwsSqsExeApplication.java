@@ -12,9 +12,11 @@ import org.springframework.cloud.aws.messaging.listener.annotation.SqsListener;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication(exclude = {ContextStackAutoConfiguration.class})
+@RequestMapping("/api/v1")
 @RestController
 public class SpringbootAwsSqsExeApplication {
 
@@ -32,7 +34,8 @@ public class SpringbootAwsSqsExeApplication {
         queueMessagingTemplate.send(endpoint, MessageBuilder.withPayload(message).build());
     }
 
-    @SqsListener("javatechie-queue")
+    //aws queue name or queue url
+    @SqsListener("https://sqs.us-east-1.amazonaws.com/648770996788/javatechie-queue")
     public void loadMessageFromSQS(String message)  {
         logger.info("message from SQS Queue {}",message);
     }
