@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SpringbootAWSECSFARGETV1" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.mayyar.ecs.fargate.v1.ecsfargate.EcsfargateApplication" />
+    <module name="ecsfargate" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
