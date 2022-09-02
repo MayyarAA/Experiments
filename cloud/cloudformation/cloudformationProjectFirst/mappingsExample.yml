@@ -1,0 +1,33 @@
+Parameters:
+  BucketNameParameter:
+    Type: String
+    Description: 'Bucket name set by user via aws console'
+  Environment:
+    Type: String
+    AllowedValues:
+      - Dev
+      - Test
+      - Prod
+    Description: 'Restricted user selection of environment parameter, via allowedValues'
+
+Mappings:
+  EnvironmentToBucketSuffix:
+    Dev:
+      Suffix: 'dev-env'
+    Test:
+      Suffix: 'test-env'
+    Prod:
+      Suffix: 'prod-env'
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        !Join [
+          '-',
+          [
+            !Ref BucketNameParameter,
+            !FindInMap [EnvironmentToBucketSuffix, !Ref Environment, Suffix],
+          ],
+        ]
