@@ -1,0 +1,7 @@
+Parameters:
+  BucketNameParameter:
+    Type: String
+    Description: 'A bucket name set by user'
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
