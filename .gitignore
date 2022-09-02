@@ -10,3 +10,5 @@ yml
 
 # ignore all logs
 application.yml
+
+*.DS_Store
