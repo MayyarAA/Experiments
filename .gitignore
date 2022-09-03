@@ -12,3 +12,5 @@ yml
 application.yml
 
 *.DS_Store
+
+!lambda/*.js
