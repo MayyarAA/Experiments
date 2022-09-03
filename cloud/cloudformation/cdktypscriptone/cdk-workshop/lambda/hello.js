@@ -3,6 +3,6 @@ exports.handler = async function (event) {
 	return {
 		statusCode: 200,
 		headers: { 'Content-Type': 'text/plain' },
-		body: `Hello, CDK! You've hit ${event.path}\n`,
+		body: `hcanged body message to nrw one now changed for cdk watch ${event.path}\n`,
 	};
 };
