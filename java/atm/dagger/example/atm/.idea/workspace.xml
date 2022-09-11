@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d83d13ac-2315-43c3-af53-a2a7e0671710" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/7.1.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/7.1.1/dependencies-accessors/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/7.1.1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/atm.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/7.1.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gradle/7.1.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gradle/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../AccountModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/AccountModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../AmountsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/AmountsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BUILD" beforeDir="false" afterPath="$PROJECT_DIR$/BUILD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BigDecimalCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/BigDecimalCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CommandLineAtm.java" beforeDir="false" afterPath="$PROJECT_DIR$/CommandLineAtm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CommandProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CommandProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CommandProcessorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/CommandProcessorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CommandRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/CommandRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CommandsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/CommandsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../DepositCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/DepositCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../HelloWorldCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/HelloWorldCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../InMemoryDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/InMemoryDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../InMemoryDatabaseModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InMemoryDatabaseModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../LoginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/LoginCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../LogoutCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/LogoutCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../MaximumWithdrawal.java" beforeDir="false" afterPath="$PROJECT_DIR$/MaximumWithdrawal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../MinimumBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/MinimumBalance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Outputter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Outputter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../PerSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/PerSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SingleArgCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/SingleArgCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SystemOutModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/SystemOutModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../UserCommandsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserCommandsModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../UserCommandsRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserCommandsRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Username.java" beforeDir="false" afterPath="$PROJECT_DIR$/Username.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../WithdrawCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/WithdrawCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../WithdrawalLimiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/WithdrawalLimiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EMryHEjHcWXUOt7hwMH5LrTs34" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="atm" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d83d13ac-2315-43c3-af53-a2a7e0671710" name="Changes" comment="" />
+      <created>1662416547355</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662416547355</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
