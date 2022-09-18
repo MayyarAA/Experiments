@@ -1,0 +1,16 @@
+class Solution {
+    public boolean checkString(String s) {
+        /*
+        find the first b if you find any a after => false
+            use a boolean to track firstB
+        */
+        
+        boolean firstBFound = false;
+        char[] arr = s.toCharArray();
+        for(char ch:arr){
+            if(!firstBFound && Character.compare(ch,'b')==0)firstBFound=true;
+            if(firstBFound && Character.compare(ch,'a')==0)return false;
+        }
+        return true;
+    }
+}
