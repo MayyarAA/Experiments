@@ -1,0 +1,36 @@
+class Solution {
+    /**
+    [6,5,7,9,2,2] => 
+    [2,3,5,5]
+    */
+    public int minimumCost(int[] cost2) {
+        Arrays.sort(cost2);
+        int[] cost = sortArray(cost2);
+        int finalCost = 0;
+        int i=0;        
+        while(i<cost.length){
+            // buy 2 
+            finalCost+= cost[i]; // first purchase
+            if(i<cost.length-1 && i<cost.length-1){
+                i++;
+                finalCost+= cost[i]; // second purchase                
+                i++;// free candy
+            }else if(i<cost.length-1){
+                i++;
+                finalCost+= cost[i]; // second purchase
+            }else{
+                break;  
+            }
+            i++;            
+        }
+        return finalCost;
+    }
+    
+    int[] sortArray(int[] arr){
+        int[] res = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            res[res.length-1-i] = arr[i];
+        }
+        return res;
+    }
+}
