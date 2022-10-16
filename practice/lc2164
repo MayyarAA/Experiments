@@ -1,0 +1,70 @@
+class Solution {
+    /**
+    2 arrays
+    sort each one
+    then merge them 
+    */
+    public int[] sortEvenOdd(int[] nums) {
+        int lengthOfOddArray =0;
+        int lengthOfEvenArray =0;
+        if(nums.length%2==0){
+            lengthOfOddArray = nums.length/2;
+            lengthOfEvenArray = nums.length/2;
+        }else{            
+            lengthOfOddArray = (nums.length/2);
+            lengthOfEvenArray = (nums.length/2)+1;
+        }        
+        int[] oddArray = sortNonIncreasing(nums, lengthOfOddArray);        
+        int[] evenArray = sortNonDecreasing(nums, lengthOfEvenArray);
+        int[] sortedArray = combineArrays(evenArray, oddArray);
+        return sortedArray;
+    }
+    
+    int[] sortNonIncreasing(int[] nums, int lengthOfOddArray){
+        int[] res = new int[lengthOfOddArray];
+        int[] res2 = new int[lengthOfOddArray];
+        int index=0;
+        for(int i=0;i<nums.length;i++){
+            if(i%2!=0){                
+                res[index]=nums[i];
+                index++;
+            }
+        }
+        Arrays.sort(res);
+        for(int i=0;i<res.length;i++){
+            res2[i] = res[res.length-1-i];
+        }
+        return res2;
+    }
+    
+    int[] sortNonDecreasing(int[] nums, int lengthOfEvenArray){
+        int[] evenArray = new int[lengthOfEvenArray];
+        int index=0;
+        for(int i=0;i<nums.length;i++){
+            if(i%2==0){                
+                evenArray[index]=nums[i];
+                index++;
+            }
+        }
+        Arrays.sort(evenArray);
+        return evenArray;
+        
+    }
+    
+
+    int[] combineArrays(int[] evenArray, int[] oddArray){
+        int[] res = new int[evenArray.length+oddArray.length];        
+        int evenArrayIndex=0;
+        int oddArrayIndex=0;
+        for(int i=0;i<res.length;i++){
+            if(i%2==0){
+                res[i]=evenArray[evenArrayIndex];
+                evenArrayIndex++;
+            }else{
+                res[i]=oddArray[oddArrayIndex];
+                oddArrayIndex++;
+            }
+        }
+        return res;
+    }
+}
