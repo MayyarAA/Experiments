@@ -1,0 +1,25 @@
+class Solution {
+    /**
+    
+     */
+    public int countPrefixes(String[] words, String s) {
+        int numOfPrefixes = 0;
+        for(String word : words){
+            if(isPrefix(word, s)){
+                numOfPrefixes++;
+            }
+        }
+        return numOfPrefixes;
+    }
+
+    boolean isPrefix(String word, String s){
+        if(word.length() > s.length())return false;
+        char[] wordArr = word.toCharArray();
+        char[] mainWord = s.toCharArray();
+        int index=0;
+        while(index < wordArr.length && Character.compare(wordArr[index],mainWord[index])==0){
+            index++;
+        }
+        return index==wordArr.length;
+    }
+}
