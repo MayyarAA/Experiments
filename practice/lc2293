@@ -1,0 +1,31 @@
+class Solution {
+    /**
+    n => n/2
+    even i => newNumes[i] = min(nums[2 * i], nums[2 * i + 1])
+    odd i => newNumes[i] = max(nums[2 * i], nums[2 * i + 1])
+     */
+    public int minMaxGame(int[] nums) {
+        if(nums.length%2!=0) return nums[0];
+        int lastValueOutput = determineLastIndex(nums);
+        return lastValueOutput;
+    }
+
+    int determineLastIndex(int[] numsOrg){
+        if(numsOrg.length==1) return numsOrg[0];                     
+        int[] newNumes = generateNewNumes(numsOrg);
+        // System.out.println(Arrays.toString(newNumes));
+        return determineLastIndex(newNumes);        
+    }
+
+    int[] generateNewNumes(int[] nums){
+        int[] newNumes = new int[nums.length/2];
+        for(int i=0;i<newNumes.length;i++){
+            if(i%2==0){
+                newNumes[i] = Math.min(nums[2*i], nums[2*i+1]);
+            }else{
+                newNumes[i] = Math.max(nums[2*i], nums[2*i+1]);
+            }                
+        }
+        return newNumes;
+    }
+}
