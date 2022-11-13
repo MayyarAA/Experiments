@@ -1,0 +1,31 @@
+class Solution {
+    boolean isValid(HashSet<Integer> set, int lengthNeeded){
+        for(int i=1;i<=lengthNeeded;i++){
+            if(!set.contains(i)) return false;;
+        }
+        return true;
+    }
+    public boolean checkValid(int[][] matrix) {
+        int lengthNeeded = matrix.length;
+        // System.out.println(matrix[0][1]);
+        HashSet<Integer> set = new HashSet<>();        
+        
+        for(int row=0; row<matrix.length;row++){            
+            for(int col=0; col<matrix[row].length;col++){                                
+                set.add(matrix[row][col]);
+            }            
+            if(!isValid(set, lengthNeeded)) return false;
+            set.clear();
+        }
+
+        for(int col=0; col<matrix[0].length;col++){            
+            // int lengthNeeded2 = lengthNeeded;            
+            for(int row=0; row < matrix.length ;row++){                                
+                set.add(matrix[row][col]);
+            }
+            if(!isValid(set, lengthNeeded)) return false;
+            set.clear();
+        }
+        return true;
+    }
+}
