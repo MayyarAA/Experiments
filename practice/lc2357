@@ -1,0 +1,41 @@
+class Solution {
+    /**
+    pQueue<store all values >
+     */
+    public int minimumOperations(int[] nums) {
+        int minimumOperations = 0;
+        Arrays.sort(nums);        
+        int startIndex = calcStartIndex(nums);        
+        minimumOperations = calcMinOps(nums, startIndex, minimumOperations);
+        return minimumOperations;
+    }
+
+    int calcMinOps(int[] nums, int startIndex, int minimumOperations){
+        if(startIndex>=nums.length) return minimumOperations;
+        int currSubtractionValue = nums[startIndex];
+        for(int i=startIndex; i<nums.length; i++){
+            nums[i]-= currSubtractionValue;
+        }
+        int nextIndex = calcNextIndex(nums, startIndex);
+        minimumOperations++;        
+        minimumOperations = calcMinOps(nums, nextIndex, minimumOperations);
+        return minimumOperations;
+    }
+
+    // needed to prevent double count on same valued indexes
+    int calcNextIndex(int[] nums, int startIndex){
+        while(startIndex<nums.length && nums[startIndex] == 0){
+            startIndex++;
+        }
+        return startIndex;
+    }
+
+    // needed to skip over 0 values
+    int calcStartIndex(int[] nums){
+        int i=0;
+        while(i< nums.length && nums[i]==0){
+            i++;
+        }
+        return i;
+    }
+}
