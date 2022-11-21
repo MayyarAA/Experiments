@@ -29,7 +29,7 @@ class NotesInPageRequestObject implements Serializable {
 @Component
 public class PageController {
     private CustomLogger customLogger;
-    private JSONDataStore jsonDataStore;
+    private JSONDataStore jsonataStore;
 
     private PageService pageService;
 

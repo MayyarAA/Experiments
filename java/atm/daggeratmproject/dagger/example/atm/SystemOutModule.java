@@ -14,4 +14,15 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+final class SystemOutModule {
+  @Provides
+  static Outputter textOutputter() {
+    return System.out::println;
+  }
+}

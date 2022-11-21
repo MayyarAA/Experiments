@@ -14,4 +14,16 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import javax.inject.Scope;
+
+/** A scope for instances that should be retained within a user session. */
+@Retention(RUNTIME)
+@Scope
+@Documented
+@interface PerSession {}

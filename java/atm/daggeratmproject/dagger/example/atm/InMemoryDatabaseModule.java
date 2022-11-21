@@ -14,4 +14,13 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import dagger.Binds;
+import dagger.Module;
+
+@Module
+interface InMemoryDatabaseModule {
+  @Binds
+  Database inMemory(InMemoryDatabase database);
+}

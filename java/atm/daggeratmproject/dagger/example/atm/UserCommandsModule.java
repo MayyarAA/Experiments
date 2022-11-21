@@ -14,4 +14,28 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import dagger.Binds;
+import dagger.Module;
+import dagger.multibindings.IntoMap;
+import dagger.multibindings.StringKey;
+
+/** Commands that are only applicable when a user is logged in. */
+@Module
+interface UserCommandsModule {
+  @Binds
+  @IntoMap
+  @StringKey("deposit")
+  Command deposit(DepositCommand command);
+
+  @Binds
+  @IntoMap
+  @StringKey("withdraw")
+  Command withdraw(WithdrawCommand command);
+
+  @Binds
+  @IntoMap
+  @StringKey("logout")
+  Command logout(LogoutCommand command);
+}

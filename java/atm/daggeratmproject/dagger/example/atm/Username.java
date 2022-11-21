@@ -14,4 +14,16 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import javax.inject.Qualifier;
+
+/** Qualifier for the currently logged-in user. */
+@Retention(RUNTIME)
+@Qualifier
+@Documented
+@interface Username {}

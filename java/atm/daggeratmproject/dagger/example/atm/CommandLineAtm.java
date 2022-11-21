@@ -14,4 +14,23 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.util.Scanner;
+
+/** Main class for the command-line ATM. */
+class CommandLineAtm {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in, UTF_8.name());
+    CommandProcessor commandProcessor = CommandProcessorFactory.create().commandProcessor();
+
+    while (scanner.hasNextLine()) {
+      Command.Status commandStatus = commandProcessor.process(scanner.nextLine());
+      if (commandStatus.equals(Command.Status.INPUT_COMPLETED)) {
+        break;
+      }
+    }
+  }
+}

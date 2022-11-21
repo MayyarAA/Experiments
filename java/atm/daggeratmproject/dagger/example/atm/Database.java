@@ -14,4 +14,22 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import java.math.BigDecimal;
+
+/** An ATM database. */
+interface Database {
+  Account getAccount(String username);
+
+  /** An individual user's account. */
+  interface Account {
+    String username();
+
+    void deposit(BigDecimal amount);
+
+    void withdraw(BigDecimal amount);
+
+    BigDecimal balance();
+  }
+}

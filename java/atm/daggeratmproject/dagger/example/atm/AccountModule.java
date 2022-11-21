@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import dagger.Module;
+import dagger.Provides;
+import dagger.example.atm.Database.Account;
+
+/** Bindings for the {@link Account} of the currently signed-in user. */
+@Module
+interface AccountModule {
+  @Provides
+  static Account account(Database database, @Username String username) {
+    return database.getAccount(username);
+  }
+}

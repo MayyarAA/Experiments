@@ -14,4 +14,22 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import dagger.BindsInstance;
+import dagger.Module;
+import dagger.Subcomponent;
+
+@PerSession
+@Subcomponent(modules = {AccountModule.class, AmountsModule.class, UserCommandsModule.class})
+interface UserCommandsRouter {
+  CommandRouter router();
+
+  @Subcomponent.Factory
+  interface Factory {
+    UserCommandsRouter create(@BindsInstance @Username String username);
+  }
+
+  @Module(subcomponents = UserCommandsRouter.class)
+  interface InstallationModule {}
+}

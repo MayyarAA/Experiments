@@ -14,4 +14,9 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+/** Writes to a user interface. */
+interface Outputter {
+  void output(String output);
+}

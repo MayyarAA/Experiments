@@ -14,4 +14,25 @@
  * limitations under the License.
  */
 
-rootProject.name = 'dagger-tutorial-atm'
+package dagger.example.atm;
+
+import dagger.Module;
+import dagger.Provides;
+import java.math.BigDecimal;
+
+/** Configures various amounts of money the application uses to control transactions. */
+@Module
+abstract class AmountsModule {
+
+  @Provides
+  @MinimumBalance
+  static BigDecimal minimumBalance() {
+    return BigDecimal.ZERO;
+  }
+
+  @Provides
+  @MaximumWithdrawal
+  static BigDecimal maximumWithdrawal() {
+    return new BigDecimal(1000);
+  }
+}
