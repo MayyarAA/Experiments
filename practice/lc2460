@@ -1,0 +1,29 @@
+class Solution {
+    public int[] applyOperations(int[] nums) {        
+        performOperations(nums);
+        int[] res = shiftZeros(nums);
+        return res;
+    }
+    int[] shiftZeros(int[] nums){
+        int[] res = new int[nums.length];
+        int endIndex = nums.length-1;
+        List<Integer> nonZeroValues = new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=0){
+                nonZeroValues.add(nums[i]);                                
+            }            
+        }
+        for(int i=0;i<nonZeroValues.size();i++){
+            res[i] = nonZeroValues.get(i);
+        }
+        return res;
+    }
+    void performOperations(int[] nums){
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]==nums[i+1]){
+                nums[i] = nums[i]*2;
+                nums[i+1] =0;
+            }
+        }
+    }
+}
