@@ -1,0 +1,22 @@
+class Solution {
+    /**
+    [1,3,4,7,4,0,1]
+    iterate over each index, 
+        add each map<sum, List<index,index+1>>
+    if any list size > 2, check if diff index,
+        return true
+     */
+    public boolean findSubarrays(int[] nums) {        
+        HashMap<Integer, HashSet<String>> listOfSums = new HashMap<>();
+        for(int i=0;i<nums.length-1;i++){
+            int sum = nums[i]+nums[i+1];
+            HashSet<String> indexes = listOfSums.getOrDefault(sum , new HashSet<String>());
+            indexes.add(i+","+(i+1));
+            if(indexes.size()>1) return true;
+            listOfSums.put(sum, indexes);
+        }
+
+        
+        return false;
+    }
+}
