@@ -1,10 +1,10 @@
 package threadsdemoone;
 
-import Logger.BaseLogger;
-import Logger.MainLogger;
-import PerformanceMetrics.TimeTracking.TimeTracker;
-import PerformanceMetrics.TimeTracking.TimeTrackerBase;
-import PerformanceMetrics.TimeTracking.TimeTrackerTuple;
+import utils.Logger.BaseLogger;
+import utils.Logger.MainLogger;
+import utils.TimeTracking.TimeTracker;
+import utils.TimeTracking.TimeTrackerBase;
+import utils.TimeTracking.TimeTrackerTuple;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

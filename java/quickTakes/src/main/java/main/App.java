@@ -1,9 +1,9 @@
 package main;
 
-import Logger.BaseLogger;
-import Logger.MainLogger;
-import PerformanceMetrics.TimeTracking.TimeTrackerBase;
-import PerformanceMetrics.TimeTracking.TimeTrackerTuple;
+import utils.Logger.BaseLogger;
+import utils.Logger.MainLogger;
+import utils.TimeTracking.TimeTrackerBase;
+import utils.TimeTracking.TimeTrackerTuple;
 import threadsdemoone.RemoteCallSimulation;
 import threadsdemoone.ThreadsMultiRemoteCalls;
 

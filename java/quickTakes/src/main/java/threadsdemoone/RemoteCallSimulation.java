@@ -1,7 +1,7 @@
 package threadsdemoone;
 
-import Logger.BaseLogger;
-import Logger.MainLogger;
+import utils.Logger.MainLogger;
+import utils.Logger.BaseLogger;
 import lombok.Builder;
 
 @Builder
