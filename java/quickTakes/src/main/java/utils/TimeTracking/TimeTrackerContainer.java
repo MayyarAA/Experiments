@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class TimeTrackerContainer {
+public class TimeTrackerContainer implements Comparable<TimeTrackerContainer> {
     private final long startTime;
     private final long endTime;
     private long runTime;
@@ -27,5 +27,19 @@ public class TimeTrackerContainer {
             throw new IllegalStateException("Runtime should not be negative");
 
         return runTime;
+    }
+
+    //ascending order
+    @Override
+    public int compareTo(TimeTrackerContainer ttc2) {
+        if(this  == null && ttc2 == null)
+            return 0;
+        if(this == null)
+            return -1;
+        if(ttc2 == null)
+            return 1;
+//        System.out.println("heere " + this.getKey());
+        return Long.compare(this.getRunTime(), ttc2.getRunTime());
+//        return Long.compare(ttc2.getRunTime(), this.getRunTime());
     }
 }

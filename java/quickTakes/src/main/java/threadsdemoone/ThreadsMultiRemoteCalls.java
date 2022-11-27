@@ -46,7 +46,7 @@ public class ThreadsMultiRemoteCalls {
         multiThreadedRemoteCallASync(10);
         timeTracker.stopTimer(multiThreadedRemoteCallWAsync);
 //        logger.logRunTimeMetrics(multiThreadedRemoteCallWAsync, timeTracker.calcRunTime(multiThreadedRemoteCallWAsync));
-        logger.logWBreak(timeTracker.printAllRuntimes());
+        logger.logWBreak(timeTracker.printAllRunTimesSorted());
 
     }
 
@@ -97,10 +97,6 @@ public class ThreadsMultiRemoteCalls {
         for (int i = 0; i < numOfCalls; i++) {
             remoteCall.makeRemoteCall("SingleMainThreadAlone");
         }
-    }
-
-    private void makePrintingThreadWait(final Thread thread) {
-//        Thread.currentThread().join(thread);
     }
 
 }

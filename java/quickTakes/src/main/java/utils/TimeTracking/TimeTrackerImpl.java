@@ -5,7 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.PriorityQueue;
+
+import utils.TimeTracking.TimeTrackerContainer;
 
 @Data
 @Builder
@@ -13,6 +17,8 @@ import java.util.HashMap;
 public class TimeTrackerImpl implements TimeTracker {
     @NonNull
     final HashMap<String, TimeTrackerContainer> timeUnitHashMap;
+
+    PriorityQueue<TimeTrackerContainer> ttcpq;
 
     public long startTimer() {
         return System.nanoTime();
@@ -78,6 +84,7 @@ public class TimeTrackerImpl implements TimeTracker {
                 + "runTime" + timeTrackerTuple.getRunTime());
         timeUnitHashMap.put(className, timeTrackerTuple);
     }
+
     private TimeTrackerContainer copyTimeTrackerTupleDeepNoEndTime(final TimeTrackerContainer timeTrackerTupleOrginal, final long endTime) {
 
         final long runTime = calcRunTime(timeTrackerTupleOrginal.getStartTime(), endTime);
@@ -89,10 +96,11 @@ public class TimeTrackerImpl implements TimeTracker {
                 .runTime(runTime)
                 .build();
     }
+
     private TimeTrackerContainer copyTimeTrackerTupleDeep(final TimeTrackerContainer timeTrackerTupleOrginal) {
         final long runTime = calcRunTime(timeTrackerTupleOrginal.getStartTime(), timeTrackerTupleOrginal.getEndTime());
-        System.out.println("timeTrackerTupleOrginal.getStartTime() "  + timeTrackerTupleOrginal.getStartTime()
-        +" timeTrackerTupleOrginal.getEndTime() " + timeTrackerTupleOrginal.getEndTime()
+        System.out.println("timeTrackerTupleOrginal.getStartTime() " + timeTrackerTupleOrginal.getStartTime()
+                + " timeTrackerTupleOrginal.getEndTime() " + timeTrackerTupleOrginal.getEndTime()
 
                 + " runtimeitn ndansdkjasnjd " + runTime);
 
@@ -117,6 +125,45 @@ public class TimeTrackerImpl implements TimeTracker {
             stringBuilder.append("}");
             stringBuilder.append(",");
         }
+        stringBuilder.append(" ");
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
+
+    public String printAllRunTimesSorted() {
+
+        PriorityQueue<TimeTrackerContainer> ttcpqValue = new PriorityQueue<>();
+        if (ttcpq == null)
+            this.ttcpq = new PriorityQueue<>();
+
+        timeUnitHashMap.forEach((key, value) -> {
+            ttcpqValue.offer(value);
+        });
+//        ttcpqValue.offer(TimeTrackerContainer.builder().startTime(11).endTime(22).runTime(2222L).build());
+//        ttcpqValue.offer(TimeTrackerContainer.builder().startTime(11).endTime(22).runTime(Long.MAX_VALUE).build());
+//        ttcpqValue.offer(TimeTrackerContainer.builder().startTime(11).endTime(22).runTime(2331300948L).build());
+//        ttcpqValue.offer(TimeTrackerContainer.builder().startTime(11).endTime(22).runTime(999999999999L).build());
+//        ttcpqValue.offer(TimeTrackerContainer.builder().startTime(11).endTime(22).runTime(555555555555L).build());
+//        ttcpqValue.offer(TimeTrackerContainer.builder().startTime(11).endTime(22).runTime(111L).build());
+        this.ttcpq = new PriorityQueue<>(ttcpqValue);
+
+        return printAllRuntimes(ttcpqValue);
+    }
+
+    private String printAllRuntimes(PriorityQueue<TimeTrackerContainer> ttcpqValue) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("TimeUnitPQ:");
+        stringBuilder.append("{");
+        stringBuilder.append(" ");
+        while (!ttcpqValue.isEmpty()) {
+            TimeTrackerContainer ttc = ttcpqValue.poll();
+            stringBuilder.append(" ");
+            stringBuilder.append("{");
+            stringBuilder.append(String.format("key: %s , runTime: %s", ttc.getKey(), ttc.getRunTime()));
+            stringBuilder.append("}");
+            stringBuilder.append(",");
+        }
+
         stringBuilder.append(" ");
         stringBuilder.append("}");
         return stringBuilder.toString();

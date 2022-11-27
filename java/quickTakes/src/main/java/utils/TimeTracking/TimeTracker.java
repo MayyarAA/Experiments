@@ -12,4 +12,6 @@ public interface TimeTracker {
      TimeDifference callRunTimeDiff(String firstCallKey, String secondCallKey);
 
      String printAllRuntimes();
+
+     String printAllRunTimesSorted();
 }
