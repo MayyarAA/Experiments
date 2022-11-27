@@ -1,13 +1,13 @@
 package threadsdemoone;
 
-import utils.Logger.MainLogger;
-import utils.Logger.BaseLogger;
+import utils.Logger.LoggerBase;
+import utils.Logger.LoggerImpl;
 import lombok.Builder;
 
 @Builder
 public class RemoteCallSimulation implements RemoteCall {
     public void makeRemoteCall(String callerName){
-        MainLogger logger = new BaseLogger();
+        LoggerBase logger = new LoggerImpl();
         logger.log(String.format("caller: %s started remote call", callerName));
         try {
             Thread.sleep(250L);
@@ -18,7 +18,7 @@ public class RemoteCallSimulation implements RemoteCall {
         logger.log(String.format("caller: %s finished remote call", callerName));
     }
     public void makeRemoteCall() {
-        MainLogger logger = new BaseLogger();
+        LoggerBase logger = new LoggerImpl();
         logger.log("remote call started");
         try {
             Thread.sleep(250L);

@@ -1,33 +1,24 @@
 package threadsdemoone;
 
-import utils.Logger.BaseLogger;
-import utils.Logger.MainLogger;
+import utils.Logger.LoggerBase;
+import utils.TimeTracking.TimeDifference;
 import utils.TimeTracking.TimeTracker;
-import utils.TimeTracking.TimeTrackerBase;
-import utils.TimeTracking.TimeTrackerTuple;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.*;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ThreadsMultiRemoteCalls {
-    MainLogger logger;
+    LoggerBase logger;
     TimeTracker timeTracker;
     RemoteCall remoteCall;
-//    public ThreadsMultiRemoteCalls(){
-//        this.logger = new BaseLogger();
-//        this.timeTracker =  TimeTrackerBase
-//                .builder()
-//                .timeUnitHashMap(new HashMap<String, TimeTrackerTuple>())
-//                .build();
-//        this.remoteCall = RemoteCallSimulation.builder().build();
-//    }
+
     public void start() {
         makeTenCallsComparison();
     }
@@ -35,20 +26,54 @@ public class ThreadsMultiRemoteCalls {
     private void makeTenCallsComparison() {
         final String singleThreadedRemoteCall = "singleThreadedRemoteCall";
         final String multiThreadedRemoteCall = "multiThreadedRemoteCall";
+        final String multiThreadedRemoteCallWAsync = "multiThreadedRemoteCallWAsync";
         //make remote call 10 times w/ 1 thread
-        timeTracker.addTimer(singleThreadedRemoteCall);
+        timeTracker.startTimer(singleThreadedRemoteCall);
         singleThreadedRemoteCall(10);
-        timeTracker.addTimer(singleThreadedRemoteCall);
+        timeTracker.stopTimer(singleThreadedRemoteCall);
         //make remote call times w/ 1 thread per a call
-        timeTracker.addTimer(multiThreadedRemoteCall);
+        timeTracker.startTimer(multiThreadedRemoteCall);
         multiThreadedRemoteCall(10);
-        timeTracker.addTimer(multiThreadedRemoteCall);
+        timeTracker.stopTimer(multiThreadedRemoteCall);
 
-//        timeTracker.calcRunTime(singleThreadedRemoteCall);
-//        timeTracker.calcRunTime(multiThreadedRemoteCall);
-        long diff = timeTracker.callRunTimeDiff(singleThreadedRemoteCall, multiThreadedRemoteCall);
-        logger.log(String.format(" diff b/w %s ran this much more/less than %s @ %s",singleThreadedRemoteCall, multiThreadedRemoteCall, diff ));
+        TimeDifference diff = timeTracker.callRunTimeDiff(singleThreadedRemoteCall, multiThreadedRemoteCall);
 
+        logger.log(String.format(" %s ran this much more/less than %s @ %s ",
+                singleThreadedRemoteCall, multiThreadedRemoteCall, diff));
+
+
+        timeTracker.startTimer(multiThreadedRemoteCallWAsync);
+        multiThreadedRemoteCallASync(10);
+        timeTracker.stopTimer(multiThreadedRemoteCallWAsync);
+//        logger.logRunTimeMetrics(multiThreadedRemoteCallWAsync, timeTracker.calcRunTime(multiThreadedRemoteCallWAsync));
+        logger.logWBreak(timeTracker.printAllRuntimes());
+
+    }
+
+    private void multiThreadedRemoteCallASync(final int numOfCalls) {
+        ExecutorServiceSimple threadPoolExecutorSimple = ExecutorServiceSimple
+                .builder()
+                .executorService(new ThreadPoolExecutor(numOfCalls, numOfCalls, 0L,
+                        TimeUnit.MILLISECONDS,
+                        new LinkedBlockingQueue<Runnable>()))
+                .build();
+
+        List<Callable<String>> runnables = new ArrayList<>();
+        for (int i = 0; i < numOfCalls; i++) {
+            runnables.add(RemoteCallOne
+                    .builder()
+                    .runnableName(String.format("%s %s", RemoteCallOne.class.getName(), i))
+                    .remoteCall(RemoteCallSimulation.builder().build())
+                    .build());
+        }
+        try {
+            threadPoolExecutorSimple.executorService.invokeAll(runnables);
+            threadPoolExecutorSimple.gracefullyTerminate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("error from multiThreadedRemoteCallASync", e.getMessage());
+        }
     }
 
     private void multiThreadedRemoteCall(final int numOfCalls) {
@@ -61,9 +86,10 @@ public class ThreadsMultiRemoteCalls {
                     String.format("%s %s", CustomThreadOne.class.getName(), i));
             threads.add(thread);
         }
-
+        Thread printingThread = new Thread(PrintingThread.builder().build(), "PrintingThread1");
         for (int i = 0; i < numOfCalls; i++) {
             threads.get(i).start();
+//            printingThread.wait(threads.get(i));
         }
     }
 
@@ -71,6 +97,10 @@ public class ThreadsMultiRemoteCalls {
         for (int i = 0; i < numOfCalls; i++) {
             remoteCall.makeRemoteCall("SingleMainThreadAlone");
         }
+    }
+
+    private void makePrintingThreadWait(final Thread thread) {
+//        Thread.currentThread().join(thread);
     }
 
 }

@@ -1,11 +1,11 @@
 package main;
 
-import utils.Logger.BaseLogger;
-import utils.Logger.MainLogger;
+import utils.Logger.LoggerImpl;
+import utils.Logger.LoggerBase;
 
 public class Main {
     public static void main(String[] args){
-        MainLogger mainLogger = (MainLogger) new BaseLogger();
+        LoggerBase mainLogger = (LoggerBase) new LoggerImpl();
         mainLogger.log("startings");
         mainLogger.log("sassasas");
     }

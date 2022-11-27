@@ -12,6 +12,9 @@ public class CustomThreadOne implements Runnable{
     public void run(){
         remoteCall.makeRemoteCall(Thread.currentThread().getName());
     }
+//public void run(){
+//    remoteCall.makeRemoteCall(runnableName);
+//}
 
 
 
