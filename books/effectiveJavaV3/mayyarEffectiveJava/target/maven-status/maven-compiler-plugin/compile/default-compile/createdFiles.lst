@@ -1,1 +1,15 @@
-DBConnectionSingleton.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeTracker.class
+com/mayyar/mayyarEffectiveJava/partone/EventObjectClonableConstructor.class
+com/mayyar/mayyarEffectiveJava/utils/Logger/LoggerImpl.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeTrackerImpl.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeTrackerImpl$TimeTrackerImplBuilder.class
+HowToPreventAClassFromBeingExtended$UtilityClass.class
+com/mayyar/mayyarEffectiveJava/partone/singleton/DBConnectionSingleton.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeDifference$TimeDifferenceBuilder.class
+SingletonV1.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeDifference.class
+com/mayyar/mayyarEffectiveJava/utils/Logger/LoggerBase.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeTrackerContainer.class
+HowToPreventAClassFromBeingExtended.class
+com/mayyar/mayyarEffectiveJava/utils/TimeTracking/TimeTrackerContainer$TimeTrackerContainerBuilder.class
+com/mayyar/mayyarEffectiveJava/App.class

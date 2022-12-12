@@ -1,3 +1,5 @@
+package com.mayyar.mayyarEffectiveJava.partone.singleton;
+
 public class DBConnectionSingleton {
     public static final DBConnectionSingleton INSTANCE = new DBConnectionSingleton();
 
