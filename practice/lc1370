@@ -1,0 +1,89 @@
+class Solution {
+    class AlphCount{
+        char alph;
+        int count;
+        AlphCount(char alph, int count){
+            this.alph = alph;
+            this.count = count;
+        }
+
+    }
+    public String sortString(String s) {
+        /**
+        - sort the string using TreeMap
+        - split into recocurance list
+            - List<CountAlp<char, int>>
+        - pick first index, subtract by 1
+        - pick second index, subtract by 1
+        ....
+        - once at end, pickt last index subtract by 1
+        - recursion
+         */
+         StringBuilder result = new StringBuilder();
+         List<AlphCount> alphCounts = preProcessing(s);
+         sortWithAlgorthim(result, alphCounts);
+
+
+
+         return result.toString();
+    }
+
+    void sortWithAlgorthim(StringBuilder result, List<AlphCount>alphCounts){
+        sortAsceding(result, alphCounts,0);                
+    }    
+
+    void sortAsceding(StringBuilder result, List<AlphCount>alphCounts, int index){
+        if(alphCounts.isEmpty()){
+            return;
+        }
+        if(index >= alphCounts.size()){
+            sortDesceding(result, alphCounts, alphCounts.size()-1);
+        }
+        if(alphCounts.isEmpty()){
+            return;
+        }
+        result.append(alphCounts.get(index).alph);
+        alphCounts.get(index).count = alphCounts.get(index).count - 1;
+        if(alphCounts.get(index).count == 0){
+            alphCounts.remove(index);            
+        }else{
+            index++;
+        }        
+        sortAsceding(result, alphCounts, index);
+    }
+
+    void sortDesceding(StringBuilder result, List<AlphCount>alphCounts, int index){
+        if(alphCounts.isEmpty()){
+            return;
+        }
+        if(index < 0 ){
+            sortAsceding(result, alphCounts, 0);
+        }
+        if(alphCounts.isEmpty()){
+            return;
+        }
+        result.append(alphCounts.get(index).alph);
+        alphCounts.get(index).count = alphCounts.get(index).count -1;
+        if(alphCounts.get(index).count == 0){
+            alphCounts.remove(index);            
+        }        
+        index--;    
+        sortDesceding(result, alphCounts, index);     
+    }
+
+    List<AlphCount> preProcessing(String s){
+        char[] sortedChars = s.toCharArray();
+         Map<Character, Integer> map = new TreeMap<>();        
+         List<AlphCount> alphCounts = new ArrayList<>();
+         for(int i=0;i<sortedChars.length;i++){
+             char character = sortedChars[i];
+             map.put(character, map.getOrDefault(character,0)+1);
+         }
+        
+        for(char key: map.keySet()){
+            alphCounts.add(new AlphCount(key, map.get(key)));
+            // System.out.println(key);
+        }
+        return alphCounts;
+    }
+}
