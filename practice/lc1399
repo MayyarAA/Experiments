@@ -1,0 +1,48 @@
+class Solution {
+    public int countLargestGroup(int n) {
+        /**
+        divide math till done
+        <sum, count>
+         */
+
+         int res=0;
+         int numWithSameSize = 0;
+         HashMap<Integer, Integer> map = new HashMap<>();
+         for(int i=1;i<=n;i++){
+             int sum = calcSum(i);
+             int currCount = map.getOrDefault(sum,0);
+             System.out.println("for n: " + i + " sum: " + sum);
+             map.put(sum,currCount+1);
+         }
+
+         for(int value:map.keySet()){
+             int groupSize = map.get(value);
+             System.out.println("sum: " + value + " group size " + groupSize);
+             if(groupSize > res){
+                 res = groupSize;
+                 numWithSameSize = 1;
+             }else if(groupSize==res){
+                 numWithSameSize++;
+             }
+             
+         }
+
+         return numWithSameSize;
+    }
+
+    int calcSum(int value){
+        int sum=0;
+        while(value>0){ 
+            if (value == 10){
+                // System.out.println(value);
+                sum+=1;
+                break;
+            }
+            int nextAdd = value %10;
+            // sum += nextAdd ==0 ? 1:nextAdd; //{4,1}
+            sum += nextAdd;
+            value = value/10;            
+        }
+        return sum;
+    }
+}
