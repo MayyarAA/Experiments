@@ -1,0 +1,84 @@
+class Trie {
+    /**
+    gives:
+    - length of word can be long
+    - a lot of calls will be made
+    thinking:
+    process:
+     */
+
+    class TrieNode{
+        char ch; // char for this TrieNode
+        boolean isWord; // end of TrieNode branch
+        // all attached chars
+        HashMap<Character, TrieNode> children;
+        public TrieNode(char ch, boolean isWord){
+            this.ch = ch;
+            this.isWord = isWord;
+            this.children = new HashMap<>();
+        }
+    }
+    HashMap<Character, TrieNode> trieNodes;
+    HashSet<String> wordsAdded;
+
+    public Trie() {
+        trieNodes = new HashMap<>();
+        wordsAdded = new HashSet<>();
+    }
+    
+    public void insert(String word) {
+        wordsAdded.add(word);
+        constructTrieNode(word);
+    }
+    
+    // hashSet to maintain prev added word
+    public boolean search(String word) {
+        return wordsAdded.contains(word);
+    }
+    
+    public boolean startsWith(String prefix) {
+        return presentInTrieNode(prefix.toCharArray(), 0, trieNodes);
+        // return false;
+    }
+
+    private boolean presentInTrieNode(char[] prefix, int index, HashMap<Character, TrieNode> trieNodesMap){
+        if(index==prefix.length) return true;
+        
+        char ch = prefix[index];
+        
+        if(trieNodesMap.containsKey(ch)){
+            return presentInTrieNode(prefix, index+1, trieNodesMap.get(ch).children);
+        }else{
+            return false;
+        }        
+    }
+
+    private void constructTrieNode(String word){
+        int indexOfCurrCharFromOrginalWord = 0;
+        char[] arr = word.toCharArray();
+        TrieNode root = trieNodes.getOrDefault(arr[0], new TrieNode(arr[0], false)); // a
+        Stack<TrieNode> nextNodes = new Stack<>();
+        nextNodes.push(root);
+        indexOfCurrCharFromOrginalWord++;        
+        while(!nextNodes.isEmpty() && indexOfCurrCharFromOrginalWord < arr.length){
+            TrieNode currNode = nextNodes.pop();//a
+            HashMap<Character, TrieNode> children = currNode.children;
+            if( indexOfCurrCharFromOrginalWord == arr.length-1);
+            TrieNode nextNode = children
+            .getOrDefault(arr[indexOfCurrCharFromOrginalWord], new TrieNode(arr[indexOfCurrCharFromOrginalWord], false));
+            nextNode.isWord = true;
+            children.put(arr[indexOfCurrCharFromOrginalWord], nextNode);
+            nextNodes.push(nextNode);
+            indexOfCurrCharFromOrginalWord++;
+        }
+        trieNodes.put(root.ch, root);
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
