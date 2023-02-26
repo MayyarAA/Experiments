@@ -1,0 +1,256 @@
+[
+    {
+        "id" : 1,
+        "name": "Pot Roast",
+        "ingredients": [
+            {
+                "quantity": "1",
+                "name": " beef roast",
+                "type": "Meat"
+            },
+            {
+                "quantity": "1 package",
+                "name": "brown gravy mix",
+                "type": "Baking"
+            }
+        ]
+    },
+    {
+        "id" : 2,
+        "name": "Roasted Asparagus",
+        "ingredients": [
+            {
+                "quantity": "1 lb",
+                "name": " asparagus",
+                "type": "Produce"
+            },
+            {
+                "quantity": "1 1/2 tbsp",
+                "name": "olive oil",
+                "type": "Condiments"
+            }
+        ]
+    },
+    {
+        "id" : 3,
+        "name": "Curried Lentils",
+        "ingredients": [
+            {
+                "quantity": "1 cup",
+                "name": "dried green lentils",
+                "type": "Misc"
+            },
+            {
+                "quantity": "1 tsp",
+                "name": "curry powder",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1 tsp",
+                "name": "salt",
+                "type": "Condiments"
+            }
+        ]
+    },
+    {
+        "id" : 4,
+        "name": "Big Night Pizza",
+        "ingredients": [
+            {
+                "quantity": "5 teaspoons",
+                "name": "yeast",
+                "type": "Baking"
+            },
+            {
+                "quantity": "5 cups",
+                "name": "flour",
+                "type": "Baking"
+            },
+            {
+                "quantity": "4 tablespoons",
+                "name": "vegetable oil",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1/4 cup",
+                "name": "pizza sauce",
+                "type": "Misc"
+            },
+            {
+                "quantity": "3/4 cup",
+                "name": "mozzarella cheese",
+                "type": "Dairy"
+            }
+        ]
+    },
+    {
+        "id" : 5,
+        "name": "Cranberry Stuffed Acorn Squash Recipe",
+        "ingredients": [
+            {
+                "quantity": "2",
+                "name": "acorn squash",
+                "type": "Produce"
+            },
+            {
+                "quantity": "1/2 cup",
+                "name": "dried cranberries",
+                "type": "Produce"
+            },
+            {
+                "quantity": "1 teaspoon",
+                "name": "cinnamon",
+                "type": "Baking"
+            },
+            {
+                "quantity": "2 tablespoons",
+                "name": "melted butter",
+                "type": "Dairy"
+            }
+        ]
+    },
+    {
+        "id" : 6,
+        "name": "Mic's Yorkshire Puds",
+        "ingredients": [
+            {
+                "quantity": "200g",
+                "name": "plain flour",
+                "type": "Baking"
+            },
+            {
+                "quantity": "3",
+                "name": "eggs",
+                "type": "Dairy"
+            },
+            {
+                "quantity": "300ml",
+                "name": "milk",
+                "type": "Dairy"
+            },
+            {
+                "quantity": "3 tbsp",
+                "name": "vegetable oil",
+                "type": "Condiments"
+            }
+        ]
+    },
+    {
+        "id" : 7,
+        "name": "Oatmeal Cookies",
+        "ingredients": [
+            {
+                "quantity": "1 cup",
+                "name": "raisins",
+                "type": "Produce"
+            },
+            {
+                "quantity": "1",
+                "name": "cup water",
+                "type": "Drinks"
+            },
+            {
+                "quantity": "1 1/2 cups",
+                "name": "sugar",
+                "type": "Baking"
+            },
+            {
+                "quantity": "2 1/2 cups",
+                "name": "flour",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 tsp.",
+                "name": "soda",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 tsp.",
+                "name": "cinnamon",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1/2 tsp.",
+                "name": "baking powder",
+                "type": "Baking"
+            },
+            {
+                "quantity": "2 cups",
+                "name": "oats",
+                "type": "Baking"
+            }
+        ]
+    },
+    {
+        "id" : 8,
+        "name": "Blueberry Oatmeal Chips",
+        "ingredients": [
+            {
+                "quantity": "2-1/2 cups",
+                "name": "rolled oats, (not instant)",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1-1/4 cups",
+                "name": "all-purpose flour",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 tbsp",
+                "name": "grated orange rind",
+                "type": "Produce"
+            },
+            {
+                "quantity": "1/4 tsp",
+                "name": "salt",
+                "type": "Baking"
+            }
+        ]
+    },
+    {
+        "id" : 9,
+        "name": "Curried chicken salad",
+        "ingredients": [
+            {
+                "quantity": "3",
+                "name": "skinless, boneless chicken breasts, halved lengthwise",
+                "type": "Meat"
+            },
+            {
+                "quantity": "1/2 cup",
+                "name": "mayonnaise",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 tbsp ",
+                "name": "lemon juice",
+                "type": "Produce"
+            },
+            {
+                "quantity": "1 1/2 tsp",
+                "name": "curry powder",
+                "type": "Baking"
+            },
+            {
+                "quantity": "2",
+                "name": "ripe mangoes, diced",
+                "type": "Produce"
+            },
+            {
+                "quantity": "2",
+                "name": "green onions, thinly sliced",
+                "type": "Produce"
+            },
+            {
+                "quantity": "6 leaves",
+                "name": "Boston lettuce",
+                "type": "Produce"
+            },
+            {
+                "quantity": "6",
+                "name": "English muffins, toasted",
+                "type": "Misc"
+            }
+        ]
+    }
+]

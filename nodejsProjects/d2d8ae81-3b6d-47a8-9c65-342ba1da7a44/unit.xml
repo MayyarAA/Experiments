@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="4.2360" tests="11" failures="6">
+  <testsuite name="Root Suite" timestamp="2023-02-26T07:51:11" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="products_api_medium" timestamp="2023-02-26T07:51:11" tests="11" file="/projects/challenge/test/index.spec.js" time="4.2360" failures="6">
+    <testcase name="products_api_medium should create a new product" time="0.0410" classname="should create a new product">
+    </testcase>
+    <testcase name="products_api_medium should create a new products without the published field" time="0.0060" classname="should create a new products without the published field">
+    </testcase>
+    <testcase name="products_api_medium should fetch all the products" time="0.0350" classname="should fetch all the products">
+    </testcase>
+    <testcase name="products_api_medium should fetch no products if there are not products stored" time="0.0040" classname="should fetch no products if there are not products stored">
+    </testcase>
+    <testcase name="products_api_medium should publish the product if all the constraints are met" time="0.0370" classname="should publish the product if all the constraints are met">
+      <failure message="expected { Object (_events, _eventsCount, ...) } to have status code 204 but got 422" type="AssertionError"><![CDATA[AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 204 but got 422
+    at Context.<anonymous> (test/index.spec.js:91:30)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+    <testcase name="products_api_medium should publish the product and the data should be updated in the DB" time="0.0330" classname="should publish the product and the data should be updated in the DB">
+      <failure message="expected { Object (_events, _eventsCount, ...) } to have status code 204 but got 422" type="AssertionError"><![CDATA[AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 204 but got 422
+    at Context.<anonymous> (test/index.spec.js:97:30)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+    <testcase name="products_api_medium should get 422 when MRP is less the price of the product" time="0.0260" classname="should get 422 when MRP is less the price of the product">
+    </testcase>
+    <testcase name="products_api_medium should get 422 when stock of the product is 0" time="0.0260" classname="should get 422 when stock of the product is 0">
+      <failure message="expected [ Array(1) ] to deeply equal [ &apos;Stock count is 0&apos; ]" type="AssertionError"><![CDATA[AssertionError: expected [ Array(1) ] to deeply equal [ 'Stock count is 0' ]
+    at Context.<anonymous> (test/index.spec.js:115:30)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+    <testcase name="products_api_medium should get 422 when both  MRP is less the price of the product and stock of the product is 0" time="0.0240" classname="should get 422 when both  MRP is less the price of the product and stock of the product is 0">
+      <failure message="expected 1 to deeply equal 2" type="AssertionError"><![CDATA[AssertionError: expected 1 to deeply equal 2
+    at Context.<anonymous> (test/index.spec.js:122:37)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testcase>
+    <testcase name="products_api_medium should get 405 for a put request to /products/:id" time="2.0020" classname="should get 405 for a put request to /products/:id">
+      <failure message="Timeout of 2000ms exceeded. For async tests and hooks, ensure &quot;done()&quot; is called; if returning a Promise, ensure it resolves. (/projects/challenge/test/index.spec.js)" type="Error"><![CDATA[Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/projects/challenge/test/index.spec.js)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)]]></failure>
+    </testcase>
+    <testcase name="products_api_medium should get 405 for a delete request to /products/:id" time="2.0020" classname="should get 405 for a delete request to /products/:id">
+      <failure message="Timeout of 2000ms exceeded. For async tests and hooks, ensure &quot;done()&quot; is called; if returning a Promise, ensure it resolves. (/projects/challenge/test/index.spec.js)" type="Error"><![CDATA[Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/projects/challenge/test/index.spec.js)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
